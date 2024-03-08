@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.urls import include
+from soundSafariApp import views
 
 urlpatterns = [
+    path('', views.index, name='index'),
+    path('soundsafari/', include('soundSafariApp.urls')),
     path('admin/', admin.site.urls),
+    
 ]
