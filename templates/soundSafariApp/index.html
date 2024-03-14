@@ -1,0 +1,55 @@
+{% extends 'soundSafariApp/base.html' %}
+
+{% block body_block %}
+<style>
+    .column {
+       float: left;
+       width: 33.33%;
+       padding: 10px;
+       box-sizing: border-box;
+       background-color: lightgreen;
+    }
+    .row::after {
+       content: "";
+       clear: both;
+       display: table;
+    }
+ </style>
+<h1>HOMEPAGE WOOHOOO</h1>
+<div class="row">
+    <div class="column">
+       <h2>Top Liked Artists</h2>
+       {% if pages %}
+        <ul>
+        {% for page in pages %}
+            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <strong>There are no pages present.</strong>
+    {% endif %}
+    </div>
+    <div class="column">
+       <h2>Top liked Albums</h2>
+       {% if pages %}
+        <ul>
+        {% for page in pages %}
+            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% endfor %}
+        </ul>
+        {% else %}
+            <strong>There are no pages present.</strong>
+        {% endif %}</div>
+    <div class="column">
+       <h2>Top Liked Songs</h2>
+       {% if pages %}
+        <ul>
+        {% for page in pages %}
+            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% endfor %}
+        </ul>
+        {% else %}
+            <strong>There are no pages present.</strong>
+        {% endif %}</div>
+ </div>
+{% endblock %}

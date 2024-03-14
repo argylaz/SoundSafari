@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head lang="en">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Song Safari</title>
+        {% load bootstrap5 %}
+        {% bootstrap_css %}
+        {% bootstrap_javascript %}
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-end ">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="">
+                    <img src="static/images/logo.jpg" alt="SoundSafari Logo" width="150" height="60">
+                  </a></a>
+                  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                      <li class="nav-item">
+                        <a class="nav-link" href="">Genres</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Artists</a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="#">Account</a>
+                      </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                      </form>
+                  </div>
+                </div>
+              </nav>
+        </header>
+        {% block body_block %}
+        {% endblock %}
+    
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">About</a></li>
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">FAQ/Guide</a></li>
+        {% if user.is_authenticated %}
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Logout</a></li>
+        {% else %}
+        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Sign Up</a></li>
+        {% endif %}
+        </ul>
+        <p class="text-center text-body-secondary">© 2024 SoundSafari Inc</p>
+  </footer>
+
+
+    </body>
+
+
+
+</html>
