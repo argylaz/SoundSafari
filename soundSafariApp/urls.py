@@ -1,11 +1,14 @@
 from django.urls import path
 from soundSafariApp import views
-from django.conf import settings
-from django.conf.urls.static import static
 
-app_name = 'SoundSafari'
+app_name = 'soundSafariApp'
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('login/', views.user_login, name='login'),
+    path('about/', views.about, name='about'),
+    path('guide/', views.guide, name='guide'),
+    path('artists/', views.artists, name='artists'),
+    path('genres/', views.genres, name='genres'),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]

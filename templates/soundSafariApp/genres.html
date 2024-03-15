@@ -1,0 +1,44 @@
+{% extends 'soundSafariApp/base.html' %}
+
+{% block body_block %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+<h1>Genres</h1>
+<div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
+      The current link item
+    </a>
+    <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+    <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+    <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+    <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
+  </div>
+
+
+<div class="d-flex flex-column flex-shrink-0 p-3 text-black bg-dark" style="width: 280px;">
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="#" class="nav-link active" aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+          Home
+        </a>
+      </li>
+    {% if genres %}
+    {% for genre in genres %}
+
+      <li>
+        <a href="{{ genre.url }}" class="nav-link text-white">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+          {{ genre.title }}
+        </a>
+      </li>
+    {% endfor %}
+        </ul>
+    {% else %}
+            <strong>There are no genres present.</strong>
+    {% endif %}
+    </ul>    
+  </div>
+{% endblock %}

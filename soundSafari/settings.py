@@ -29,7 +29,8 @@ SECRET_KEY = 'django-insecure-!+%qlvay%hg9^f6o2j=e_dsar@v^9deuxexqfg4(zz3terp%sg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ijazsaleem.pythonanywhere.com']
+ALLOWED_HOSTS = ['ijazsaleem.pythonanywhere.com',
+                 '127.0.0.1']
 
 
 # Application definition
@@ -106,6 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+LOGIN_URL = 'soundSafariApp:login'
 
 
 # Internationalization
@@ -123,9 +125,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATICFILES_DIRS=[STATIC_DIR, ]
-
 STATIC_URL = '/static/'
+STATICFILES_DIRS=[STATIC_DIR, ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
