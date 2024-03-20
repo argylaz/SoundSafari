@@ -1,11 +1,13 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 class Genre(models.Model):
     name = models.CharField(max_length=30)
-    song_count = models.IntegerField()
+    song_count = models.IntegerField(default = 0)
 
     def __str__(self):
         return self.name
@@ -19,7 +21,7 @@ class Artist(models.Model):
         return self.name
 
 class Album(models.Model):
-    genre = models.ForeignKey(Genre)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
 
     name = models.CharField(max_length=30)
@@ -31,8 +33,8 @@ class Album(models.Model):
         return self.name
 
 class Song(models.Model):
-    genre = mdoels.ForeignKey(Genre)
-    artist = models.ForeignKey(Artist)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     
     name = models.CharField(max_length=30)
@@ -42,14 +44,6 @@ class Song(models.Model):
     def __str__(self):
         return self.name
 
-class User(models.Model):
-    username = models.CharField(max_length=30)
-    password = models.CharField(max_length=30)
-    date_created = models.DateField()
-    picture = models.ImageField()
-
-    def __str__(self):
-        return self.username
 
 # A page can either represent an artist page, an album page or a song page
 # This is the entity that users will review.
@@ -92,3 +86,11 @@ class Review(models.Model):
 
     def __str__(self):
         return "Rating: " + str(self.rating) + '\n' + "Comment: " + str(self.comment)
+    
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    date_created = models.DateField()
+    picture = models.ImageField()
+
+    def __str__(self):
+        return self.user.username
