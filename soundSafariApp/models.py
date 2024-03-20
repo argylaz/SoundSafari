@@ -78,6 +78,11 @@ class Page(models.Model):
     avg_rating = models.IntegerField()
     url = models.URLField(null=True)
 
+    # Calculates the average rating of the page 
+    def calc_avg(self):
+        reviews = Review.objects.filter(page=self)
+        self.avg_rating = sum([r.rating for r in reviews]) / reviews.count()
+
     # Overriding the clean method to also ensure that two of the foreign keys are null
     # and exactly one of them is not null
     def clean(self):
@@ -104,6 +109,11 @@ class Review(models.Model):
     rating = models.IntegerField()
     date_added = models.DateField(null=True,default=None)
     comment = models.CharField(max_length=200, null=True) # Comment is optional 
+
+    # Overriding save method to call the method that calculates the average rating for the page
+    def save(self, *args, **kwargs):
+        self.page.calc_avg()
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return "Rating: " + str(self.rating) + '\n' + "Comment: " + str(self.comment)
