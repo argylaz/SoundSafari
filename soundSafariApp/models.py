@@ -28,6 +28,14 @@ class Album(models.Model):
     picture = models.ImageField()
     duation = models.IntegerField()
     release_date = models.DateField()
+    slug = models.SlugField(unique = True)
+
+    def save(self, *args, **kwargs): #slug implemenetd
+        if not self.slug:
+
+            self.slug = slugify(self.name)
+        super(Album, self).save(*args, **kwargs)
+
 
     def __str__(self):
         return self.name
@@ -40,6 +48,12 @@ class Song(models.Model):
     name = models.CharField(max_length=30)
     duration = models.IntegerField()
     release_date = models.DateField()
+    slug = models.SlugField(unique = True)
+
+    def save(self, *args, **kwargs): #slug implemented
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super(Song, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
