@@ -10,5 +10,6 @@ urlpatterns = [
     path('guide/', views.guide, name='guide'),
     path('artists/', views.artists, name='artists'),
     path('genres/', views.genres, name='genres'),
+    path('artist/<slug:slug>/', views.artist_detail_view, name='artist_detail'),
 
 ]

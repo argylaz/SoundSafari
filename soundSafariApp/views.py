@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.shortcuts import render, get_object_or_404
+from .models import Artist
 
 # Create your views here.
 
@@ -39,3 +41,7 @@ def genres(request):
 
 def guide(request):
     return render(request, 'soundSafariApp/guide.html')
+
+def artist_detail_view(request, slug):
+    artist = get_object_or_404(Artist, slug=slug)
+    return render(request, 'artist_detail.html', {'artist': artist})

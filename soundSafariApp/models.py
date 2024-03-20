@@ -14,21 +14,28 @@ class Genre(models.Model):
 
 class Artist(models.Model):
     name = models.CharField(max_length=30)
-    birthDate=models.DateTimeField()
+    birthDate=models.DateField(null=True,default=None)
     picture = models.ImageField()
+    slug = models.SlugField(unique=True, blank=True)
+
+
+    def save(self, *args, **kwargs): #slug implemented 
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super(Artist, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
 
 class Album(models.Model):
-    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE, null=True)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
 
     name = models.CharField(max_length=30)
     picture = models.ImageField()
-    duation = models.IntegerField()
-    release_date = models.DateField()
-    slug = models.SlugField(unique = True)
+    duration = models.IntegerField()
+    release_date = models.DateField(null=True,default=None)
+    slug = models.SlugField(null=True, unique = True)
 
     def save(self, *args, **kwargs): #slug implemenetd
         if not self.slug:
@@ -41,14 +48,14 @@ class Album(models.Model):
         return self.name
 
 class Song(models.Model):
-    genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
-    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    genre = models.ForeignKey(Genre, on_delete=models.CASCADE,null=True)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE,null=True)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, null=True)
     
     name = models.CharField(max_length=30)
     duration = models.IntegerField()
-    release_date = models.DateField()
-    slug = models.SlugField(unique = True)
+    release_date = models.DateField(null=True,default=None)
+    slug = models.SlugField(null=True, unique = True)
 
     def save(self, *args, **kwargs): #slug implemented
         if not self.slug:
@@ -69,7 +76,7 @@ class Page(models.Model):
     song = models.OneToOneField(Song, on_delete=models.CASCADE, null=True, blank=True)
 
     avg_rating = models.IntegerField()
-    url = models.URLField()
+    url = models.URLField(null=True)
 
     # Overriding the clean method to also ensure that two of the foreign keys are null
     # and exactly one of them is not null
@@ -91,11 +98,11 @@ class Page(models.Model):
         return  "Page with average rating: " + str(self.avg_rating)
 
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    page = models.ForeignKey(Page, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    page = models.ForeignKey(Page, on_delete=models.CASCADE, null=True)
 
     rating = models.IntegerField()
-    date_added = models.DateField()
+    date_added = models.DateField(null=True,default=None)
     comment = models.CharField(max_length=200, null=True) # Comment is optional 
 
     def __str__(self):
@@ -103,7 +110,7 @@ class Review(models.Model):
     
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    date_created = models.DateField()
+    date_created = models.DateField(null=True,default=None)
     picture = models.ImageField()
 
     def __str__(self):

@@ -26,7 +26,7 @@ class GenreForm(forms.ModelForm):
 
 class ArtistForm(forms.ModelForm):
     name = forms.CharField(max_length=30, help_text="Please enter the Artist name")
-    birthDate = forms.DateTimeField()
+    birthDate = forms.DateField(null=True,default=None)
     picture = forms.ImageField()
 
     class Meta:
@@ -37,7 +37,7 @@ class AlbumForm(forms.ModelForm):
     name = forms.CharField(max_length=30, help_text="Please enter the album name")
     picture = forms.ImageField()
     duration = forms.IntegerField()
-    release_date = forms.DateField()
+    release_date = forms.DateField(null=True,default=None)
     genre = forms.ModelChoiceField(queryset=Genre.objects.all())
     artist = forms.ModelChoiceField(queryset=Artist.objects.all())
     slug = forms.CharField(widget=forms.HiddenInput(),required=False)
@@ -49,7 +49,7 @@ class AlbumForm(forms.ModelForm):
 class SongForm(forms.ModelForm):
     name = forms.CharField(max_length=30, help_text="Please enter the song name")
     duration = forms.IntegerField()
-    release_date = forms.DateField()
+    release_date = forms.DateField(null=True,default=None)
     genre = forms.ModelChoiceField(queryset=Genre.objects.all())
     artist = forms.ModelChoiceField(queryset=Artist.objects.all())
     album = forms.ModelChoiceField(queryset=Album.objects.all())
@@ -61,7 +61,7 @@ class SongForm(forms.ModelForm):
 
 class ReviewFrom(forms.ModelForm):
     rating = forms.IntegerField()
-    date_added = forms.DateField()
+    date_added = forms.DateField(null=True,default=None)
     comment= forms.CharField(max_length=200,required=False)
     user = forms.ModelChoiceField(queryset=User.objects.all())
     page= forms.ModelChoiceIterator(queryset=Page.obejects.all())
