@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from .models import Artist
 
+
 # Create your views here.
 
 def index(request):
@@ -34,6 +35,9 @@ def about(request):
     return render(request, 'soundSafariApp/about.html')
 
 def artists(request):
+
+
+
     return render(request, 'soundSafariApp/artists.html')
 
 def genres(request):
