@@ -55,7 +55,7 @@ class Song(models.Model):
     name = models.CharField(max_length=30)
     duration = models.IntegerField()
     release_date = models.DateField(null=True,default=None)
-    slug = models.SlugField(null=True)
+    slug = models.SlugField(unique=True)
 
     def save(self, *args, **kwargs): #slug implemented
         if not self.slug:
@@ -66,25 +66,16 @@ class Song(models.Model):
         return self.name
 
 
-# A page can either represent an artist page, an album page or a song page
-# This is the entity that users will review.
-class Page(models.Model):
-    # These three foreign keys will represent the type of the page
-    # 
-    artist = models.OneToOneField(Artist, on_delete=models.CASCADE, null=True, blank=True)
-    album = models.OneToOneField(Album, on_delete=models.CASCADE, null=True, blank=True)
-    song = models.OneToOneField(Song, on_delete=models.CASCADE, null=True, blank=True)
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True, blank=True)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, null=True, blank=True)
+    song = models.ForeignKey(Song, on_delete=models.CASCADE, null=True, blank=True)
 
-    avg_rating = models.IntegerField()
-    url = models.URLField(null=True)
+    rating = models.IntegerField()
+    date_added = models.DateField(null=True,default=None)
+    comment = models.CharField(max_length=200, null=True) # Comment is optional 
 
-    # Calculates the average rating of the page 
-    def calc_avg(self):
-        reviews = Review.objects.filter(page=self)
-        self.avg_rating = sum([r.rating for r in reviews]) / reviews.count()
-
-    # Overriding the clean method to also ensure that two of the foreign keys are null
-    # and exactly one of them is not null
     def clean(self):
         super().clean()
 
@@ -93,26 +84,10 @@ class Page(models.Model):
         )
         if foreign_keys_count != 1:
             raise ValidationError("Exactly one foreign key must be not null.")
-        
-    # Overriding save method to call full_clean method
-    def save(self, *args, **kwargs):
-        self.full_clean()
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return  "Page with average rating: " + str(self.avg_rating)
-
-class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    page = models.ForeignKey(Page, on_delete=models.CASCADE, null=True)
-
-    rating = models.IntegerField()
-    date_added = models.DateField(null=True,default=None)
-    comment = models.CharField(max_length=200, null=True) # Comment is optional 
 
     # Overriding save method to call the method that calculates the average rating for the page
     def save(self, *args, **kwargs):
-        self.page.calc_avg()
+        self.full_clean()
         super().save(*args, **kwargs)
 
     def __str__(self):

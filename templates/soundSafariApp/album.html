@@ -1,0 +1,31 @@
+{% extends 'soundSafariApp/base.html' %}
+
+{% block body_block %}
+<div class="album-detail">
+    <div class="album-info">
+        <img src="{{ album.picture.url }}" alt="{{ album.title }}">
+        <h2>{{ album.name }}</h2>
+        <p>{{ album.artist }}</p>
+        <p>{{ album.release_date }}</p>
+        <p> {{ songs.count }}songs, {{ album.duration }}</p>
+    </div>
+    <div class="song-list">
+        {% for song in songs %}
+            <div class="song">
+                <a href="#">{{ song.title }}</a>
+                <span>{{ song.duration }}</span>
+            </div>
+        {% endfor %}
+    </div>
+    <div class="comments-section">
+        <h3>{{ comments.count }} Comments</h3>
+        {% for comment in comments %}
+            <div class="comment">
+                <strong>{{ comment.user.username }}</strong>
+                <p>{{ comment.text }}</p>
+            </div>
+        {% endfor %}
+        <!-- Add comment form -->
+    </div>
+</div>
+{% endblock %}

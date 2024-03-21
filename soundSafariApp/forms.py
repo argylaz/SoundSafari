@@ -1,4 +1,4 @@
-from soundSafariApp.models import Album,Artist,Song,Genre,User, UserProfile,Page,Review
+from soundSafariApp.models import Album,Artist,Song,Genre,User, UserProfile
 from django.contrib.auth.models import User
 from django import forms
 

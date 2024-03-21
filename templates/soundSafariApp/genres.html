@@ -46,6 +46,11 @@
     color: #0b5ed7;
     cursor: pointer;
 }
+.image-thumb {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+        }
 </style>
 
 <body>
@@ -72,6 +77,7 @@
                     <a href="#" class="text-decoration-none text-dark">
                         <div class="card song-card">
                             <div class="card-body d-flex align-items-center">
+                              <img src="{{ song.artist.picture.url }}" alt="" class="image-thumb me-3">
                                 <div>
                                     <h5 class="card-title">{{ song.name }}</h5>
                                     <p class="card-text">{{ song.artist.name }}</p>
