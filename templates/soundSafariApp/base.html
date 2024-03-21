@@ -17,7 +17,7 @@
             <nav class="navbar navbar-expand-lg bg-body-tertiary justify-content-end align-items-center">
                 <div class="container-fluid">
                   <a class="navbar-brand" href="{% url 'soundSafariApp:index' %}">
-                    <img src="static/images/logo.jpg" alt="SoundSafari Logo" width="150" height="60">
+                    <img src="{% static 'images/logo.jpg' %}" alt="SoundSafari Logo" width="150" height="60">
                   </a></a>
                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -36,7 +36,7 @@
                       </li>                        
                         {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Sign Up</a>
+                            <a class="nav-link" href="{% url 'soundSafariApp:register' %}">Sign Up</a>
                         </li> 
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'soundSafariApp:login' %}">Login</a>
@@ -59,9 +59,9 @@
         <li class="nav-item"><a href="{% url 'soundSafariApp:about' %}" class="nav-link px-2 text-body-secondary">About</a></li>
         <li class="nav-item"><a href="{% url 'soundSafariApp:guide' %}" class="nav-link px-2 text-body-secondary">FAQ/Guide</a></li>
         {% if user.is_authenticated %}
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Logout</a></li>
+        <li class="nav-item"><a href="{% url 'soundSafariApp:logout' %}" class="nav-link px-2 text-body-secondary">Logout</a></li>
         {% else %}
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Sign Up</a></li>
+        <li class="nav-item"><a href="{% url 'soundSafariApp:register' %}" class="nav-link px-2 text-body-secondary">Sign Up</a></li>
         {% endif %}
         </ul>
         <p class="text-center text-body-secondary">© 2024 SoundSafari Inc</p>

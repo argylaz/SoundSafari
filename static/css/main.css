@@ -1,3 +1,43 @@
 body {
     background-color: lightblue;
 }
+
+.item-link {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eaeaea; /* Add a subtle line between items */
+    padding: 10px;
+    background-color: white;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    color: #333; /* Dark grey text */
+  }
+  
+  .item-link:hover {
+    background-color: #f9f9f9; /* Light grey background on hover */
+  }
+  
+  .item-image {
+    width: 100px; /* Adjust the size as needed */
+    height: 100px; /* Adjust the size as needed */
+    border-radius: 50%; /* Circle image */
+    margin-right: 20px; /* Space between image and name */
+    object-fit: cover; /* Keep aspect ratio */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Soft shadow around the image */
+  }
+  
+  .item-name {
+    font-size: 1.5em; /* Larger text */
+    font-weight: bold; /* Bold text */
+    flex-grow: 1; /* Ensure name takes the remaining space */
+    display: flex;
+    align-items: center; /* Vertically center the text next to the image */
+  }
+  
+  /* Clear list styles */
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  

@@ -50,12 +50,12 @@ class Album(models.Model):
 class Song(models.Model):
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE,null=True)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE,null=True)
-    album = models.ForeignKey(Album, on_delete=models.CASCADE, null=True)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, blank=True)
     
     name = models.CharField(max_length=30)
     duration = models.IntegerField()
     release_date = models.DateField(null=True,default=None)
-    slug = models.SlugField(null=True, unique = True)
+    slug = models.SlugField(null=True)
 
     def save(self, *args, **kwargs): #slug implemented
         if not self.slug:
