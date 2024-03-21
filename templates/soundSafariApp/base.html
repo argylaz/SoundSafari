@@ -32,7 +32,7 @@
                       </li>
                       {% if user.is_authenticated %}
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Account</a>
+                        <a class="nav-link" href="{% url 'soundSafari:profile' %}">Profile</a>
                       </li>                        
                         {% else %}
                         <li class="nav-item">
@@ -58,6 +58,7 @@
         <li class="nav-item"><a href="{% url 'soundSafariApp:index' %}" class="nav-link px-2 text-body-secondary">Home</a></li>
         <li class="nav-item"><a href="{% url 'soundSafariApp:about' %}" class="nav-link px-2 text-body-secondary">About</a></li>
         <li class="nav-item"><a href="{% url 'soundSafariApp:guide' %}" class="nav-link px-2 text-body-secondary">FAQ/Guide</a></li>
+        <li class="nav-item"><a href="{% url 'soundSafariApp:profile' %}" class="nav-link px-2 text-body-secondary">User Profile</a></li>
         {% if user.is_authenticated %}
         <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Logout</a></li>
         {% else %}

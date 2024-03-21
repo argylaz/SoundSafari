@@ -1,0 +1,29 @@
+{% extends 'soundSafariApp/base.html' %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to CSS file for styling -->
+</head>
+<body>
+    <div class="profile-container">
+        <h1>Profile</h1>
+        <div class="profile-picture">
+            <img src="default-profile.png" id="profilePic" alt="Profile Picture">
+            <input type="file" id="imageUpload" accept="image/*">
+        </div>
+        <div class="profile-details">
+            <p><strong>Name:</strong> <span id="userName">{{ user_name }}</span></p>
+            <p><strong>Date Created:</strong> <span id="dateCreated">{{ date_created }}</span></p>
+
+        </div>
+    </div>
+
+    <script src="script.js"></script> <!-- Link to JavaScript file -->
+</body>
+</html>

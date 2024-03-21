@@ -4,8 +4,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
-from .models import Artist
-
+from soundSafariApp.models import Artist
+from soundSafariApp.forms import ArtistForm
+from soundSafariApp.forms import UserProfileForm
+from soundSafariApp.models import UserProfile
 
 # Create your views here.
 
@@ -35,10 +37,9 @@ def about(request):
     return render(request, 'soundSafariApp/about.html')
 
 def artists(request):
-
-
-
     return render(request, 'soundSafariApp/artists.html')
+
+
 
 def genres(request):
     return render(request, 'soundSafariApp/genres.html')
@@ -46,6 +47,12 @@ def genres(request):
 def guide(request):
     return render(request, 'soundSafariApp/guide.html')
 
-def artist_detail_view(request, slug):
-    artist = get_object_or_404(Artist, slug=slug)
-    return render(request, 'artist_detail.html', {'artist': artist})
+def profile(request):
+
+    user_profile = UserProfile.objects.get(user=request.user)
+
+    context = {
+        'user_name': request.user.username,
+        'date_created': user_profile.date_created.strftime('%Y-%m-%d'),
+    }
+    return render(request, 'soundSafariApp/userprofile.html', context)
