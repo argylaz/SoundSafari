@@ -52,7 +52,7 @@ class SongForm(forms.ModelForm):
     release_date = forms.DateField(required=False, initial=None)
     genre = forms.ModelChoiceField(queryset=Genre.objects.all())
     artist = forms.ModelChoiceField(queryset=Artist.objects.all())
-    album = forms.ModelChoiceField(queryset=Album.objects.all())
+    album = forms.ModelChoiceField(queryset=Album.objects.all(), required= False)
     slug = forms.CharField(widget=forms.HiddenInput(),required=False)
 
     class Meta:
