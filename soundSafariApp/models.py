@@ -97,6 +97,18 @@ class Page(models.Model):
     def __str__(self):
         return  "Page with average rating: " + str(self.avg_rating)
 
+<<<<<<< Updated upstream
+=======
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    date_created = models.DateField(null=True,default=None)
+    picture = models.ImageField(default="static/images/defaultUsrImg.jpg")
+    bio = models.TextField(blank=True, null=True) 
+
+    def __str__(self):
+        return self.user.username
+    
+>>>>>>> Stashed changes
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     page = models.ForeignKey(Page, on_delete=models.CASCADE, null=True)

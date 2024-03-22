@@ -70,3 +70,18 @@ class ReviewForm(forms.ModelForm):
         model= Review
         fields=('rating','date_added','user','page','comment')
 
+<<<<<<< Updated upstream
+=======
+'''
+
+class EditProfileForm(forms.ModelForm):
+    username = forms.CharField(required=False)  
+
+    class Meta:
+        model = UserProfile
+        fields = ['picture', 'username', 'bio'] 
+        widgets = {
+            'bio': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}), 
+            'picture': forms.FileInput(attrs={'class': 'form-control'}),
+        }
+>>>>>>> Stashed changes
