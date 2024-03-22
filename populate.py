@@ -171,16 +171,16 @@ def create_songs():
         {'artist' : Artist.objects.get(name='Eminem'), 'name': 'Lose Yourself', 'genre' : Genre.objects.get(name='Hip-Hop'), 'duration': 326, 'release_date': timezone.datetime(2002, 10, 28)},
 
         # AC/DC Album Songs
-        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Highway to Hell', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 208, 'release_date': timezone.datetime(1979, 7, 27)},
-        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Girls Got Rhythm', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 189, 'release_date': timezone.datetime(1979, 7, 27)},
-        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Walk All Over You', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 310, 'release_date': timezone.datetime(1979, 7, 27)},
-        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Touch Too Much', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 272, 'release_date': timezone.datetime(1979, 7, 27)},
-        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Beating Around the Bush', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 223, 'release_date': timezone.datetime(1979, 7, 27)},
-        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Shot Down in Flames', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 183, 'release_date': timezone.datetime(1979, 7, 27)},
-        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Get It Hot', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 185, 'release_date': timezone.datetime(1979, 7, 27)},
-        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'If You Want Blood (You\'ve Got It)', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 280, 'release_date': timezone.datetime(1979, 7, 27)},
-        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Love Hungry Man', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 245, 'release_date': timezone.datetime(1979, 7, 27)},
-        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Night Prowler', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 276, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Highway to Hell', 'album' : Album.objects.get(name='Highway to Hell (Album)'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 208, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Girls Got Rhythm', 'album' : Album.objects.get(name='Highway to Hell (Album)'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 189, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Walk All Over You', 'album' : Album.objects.get(name='Highway to Hell (Album)'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 310, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Touch Too Much', 'album' : Album.objects.get(name='Highway to Hell (Album)'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 272, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Beating Around the Bush', 'album' : Album.objects.get(name='Highway to Hell (Album)'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 223, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Shot Down in Flames', 'album' : Album.objects.get(name='Highway to Hell (Album)'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 183, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Get It Hot', 'album' : Album.objects.get(name='Highway to Hell (Album)'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 185, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'If You Want Blood (You\'ve Got It)', 'album' : Album.objects.get(name='Highway to Hell (Album)'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 280, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Love Hungry Man', 'album' : Album.objects.get(name='Highway to Hell (Album)'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 245, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Night Prowler', 'album' : Album.objects.get(name='Highway to Hell (Album)'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 276, 'release_date': timezone.datetime(1979, 7, 27)},
 
         # AC/DC Singles
         {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Back in Black', 'genre' : Genre.objects.get(name='Rock'), 'duration': 255, 'release_date': timezone.datetime(1980, 7, 21)},
@@ -393,8 +393,21 @@ def create_reviews():
             'page': Page.objects.get(name='Back in Black'),
             'rating': 4,
             'date_added': timezone.now(),
+        },
+        {
+            'user': UserProfile.objects.get(user__username='BurgerKing123'),
+            'page': Page.objects.get(name='ACDC'),
+            'rating': 5,
+            'date_added': timezone.now(),
+        },
+        {
+            'user': UserProfile.objects.get(user__username='BurgerKing123'),
+            'page': Page.objects.get(name='Beyonce'),
+            'rating': 2,
+            'date_added': timezone.now(),
         }
     ]
+
     for review_data in reviews_data:
         Review.objects.create(**review_data)
 
