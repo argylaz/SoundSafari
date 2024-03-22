@@ -15,7 +15,11 @@
 
         <!-- Albums and Singles Column -->
         <div class="col-md-8">
-            <h3>Albums</h3>
+            {% if user.is_authenticated %}
+                    <h3>Album - <a href="">Add Album</a> </h3>
+                    {%else%}
+                    <h3>Album</h3>
+                    {%endif%}
             <div class="list-group mb-4">
                 {% for album in albums %}
                     <a href="{% url 'soundSafariApp:show_album' artist_name_slug=artist.slug album_name_slug=album.slug %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
@@ -23,7 +27,7 @@
                         <span class="ml-2">
                             <strong>{{ album.name }}</strong>
                             <br>
-                            <small>{{ album.release_date|date:"Y-m-d" }} - {{ album.duration }}</small>
+                            <small>{{ album.release_date|date:"Y-m-d" }} - {{ album.duration }}secs</small>
                         </span>
                     </a>
                 {% empty %}
@@ -31,11 +35,15 @@
                 {% endfor %}
             </div>
 
-            <h3>Singles</h3>
+            {% if user.is_authenticated %}
+                    <h3>Singles - <a href="">Add Single</a> </h3>
+                    {%else%}
+                    <h3>Singles</h3>
+                    {%endif%}
             <div class="list-group">
                 {% for song in songs %}
                     <a href="#" class="list-group-item list-group-item-action">
-                        {{ song.name }} - {{ song.duration }}
+                        <b>{{ song.name }} </b>- {{ song.duration }}secs - {{song.release_date}}
                     </a>
                 {% empty %}
                     <p>No singles available.</p>
@@ -44,17 +52,25 @@
             
             <div class="row mt-4">
                 <div class="col-12">
+                    {% if user.is_authenticated %}
+                    <h3>Reviews - <a href="">Add Review</a> </h3>
+                    {%else%}
                     <h3>Reviews</h3>
+                    {%endif%}
                     <div class="border rounded p-3">
+                    {%if reviews%}
                         {% for review in reviews %}
                             <div class="media mb-3">
-                                <img src="{{ review.user.picture.url }}" alt="{{ review.user.username }}" class="mr-3 rounded-circle" style="width: 48px; height: 48px;">
+                                <img src="{{ review.user.picture.url }}" alt="{{ review.user.name }}" class="mr-3 rounded-circle" style="width: 48px; height: 48px;">
                                 <div class="media-body">
-                                    <h5 class="mt-0">{{ review.user.username }}</h5>
+                                    <h5 class="mt-0">{{ review.user.username }} - Rating {{review.rating}}</h5>
                                     {{ review.comment }}
                                 </div>
                             </div>
                         {% endfor %}
+                    {%else%}
+                    <strong>No Reviews yet</strong>
+                    {%endif%}
                     </div>
         </div>
     

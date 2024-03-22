@@ -1,0 +1,63 @@
+{% extends 'soundSafariApp/base.html' %}
+
+{% block body_block %}
+<body>
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-lg-4">
+            <!-- Artist Picture -->
+            <img src="{{ song.artist.picture.url }}" alt="{{ song.artist.name }}" class="img-thumbnail mb-4">
+        </div>
+        <div class="col-lg-8">
+            <h1 class="mb-3">{{ song.name }}</h1>
+            <dl class="row">
+                <dt class="col-sm-3">Artist</dt>
+                <dd class="col-sm-9">{{ song.artist.name }}</dd>
+                
+                <dt class="col-sm-3">Genre</dt>
+                <dd class="col-sm-9">{{ song.genre.name }}</dd>
+                
+                <dt class="col-sm-3">Duration</dt>
+                <dd class="col-sm-9">{{ song.duration }} Seconds</dd>
+                
+                <dt class="col-sm-3">Release Date</dt>
+                <dd class="col-sm-9">{{ song.release_date }}</dd>
+                
+                <dt class="col-sm-3">Album</dt>
+                <dd class="col-sm-9">
+                    {% if song.album %}
+                        <a href="{% url 'soundSafariApp:show_album' artist_name_slug=song.artist.slug album_name_slug=song.album.slug %}">{{ song.album.name }}</a>
+                    {% else %}
+                        Single
+                    {% endif %}
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+<div class="col-lg-4">
+    <div class="comments-section">
+        {% if user.is_authenticated %}
+                    <h3>Reviews - <a href="">Add Review</a> </h3>
+                    {%else%}
+                    <h3>Reviews</h3>
+                    {%endif%}
+        {% for review in reviews %}
+            <div class="card mb-3">
+                <div class="card-header">
+                    {{ review.user.username }}
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ review.comment }}</p>
+                </div>
+            </div>
+        {% empty %}
+            <p>No comments yet.</p>
+        {% endfor %}
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+{% endblock %}
+
