@@ -13,15 +13,15 @@ from soundSafariApp.forms import UserForm, UserProfileForm, GenreForm, EditProfi
 def index(request):
     contextdict = {}
     # Get top rated artists
-    TR_artists = Page.objects.filter(artist__isnull=False).order_by('-avg_rating')[:10]
+    TR_artists = Page.objects.filter(artist__isnull=False).order_by('-avg_rating')[:7]
     contextdict['artists'] = TR_artists
 
     # Get top rated albums
-    TR_albums = Page.objects.filter(album__isnull=False).order_by('-avg_rating')[:10]
+    TR_albums = Page.objects.filter(album__isnull=False).order_by('-avg_rating')[:7]
     contextdict['albums'] = TR_albums
 
     # Get top rated songs
-    TR_songs = Page.objects.filter(song__isnull=False).order_by('-avg_rating')[:10]
+    TR_songs = Page.objects.filter(song__isnull=False).order_by('-avg_rating')[:7]
     contextdict['songs'] = TR_songs
 
     return render(request, 'soundSafariApp/index.html', contextdict)

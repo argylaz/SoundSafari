@@ -77,7 +77,7 @@ def create_albums():
             'picture': 'images/TheEminemShow.jpg',
         },
         {
-            'name' : 'Highway to Hell',
+            'name' : 'Highway to Hell (Album)',
             'genre' : Genre.objects.get(name='Rock'),
             'artist' : Artist.objects.get(name='ACDC'),
             'release_date' : timezone.datetime(1979, 7, 27),
@@ -355,6 +355,44 @@ def create_reviews():
             'rating': 4,
             'date_added': timezone.now(),
             'comment': 'Powerful and empowering!'
+        },
+        {
+            'user': UserProfile.objects.get(user__username='DancingPotato'),
+            'page': Page.objects.get(name='Hittman'),
+            'rating': 5,
+            'date_added': timezone.now(),
+            'comment': 'Best Metal band ever!'
+        },
+        {
+            'user': UserProfile.objects.get(user__username='PizzaManiac22'),
+            'page': Page.objects.get(name='Hittman'),
+            'rating': 4,
+            'date_added': timezone.now(),
+            'comment': 'Extremely Underrated!'
+        },
+        {
+            'user': UserProfile.objects.get(user__username='DancingPotato'),
+            'page': Page.objects.get(name='Back in Black'),
+            'rating': 4,
+            'date_added': timezone.now(),
+        },
+        {
+            'user': UserProfile.objects.get(user__username='DancingPotato'),
+            'page': Page.objects.get(name='Thunderstruck'),
+            'rating': 3,
+            'date_added': timezone.now(),
+        },
+        {
+            'user': UserProfile.objects.get(user__username='BurgerKing123'),
+            'page': Page.objects.get(name='I Know Places'),
+            'rating': 2,
+            'date_added': timezone.now(),
+        },
+        {
+            'user': UserProfile.objects.get(user__username='DancingPotato'),
+            'page': Page.objects.get(name='Back in Black'),
+            'rating': 4,
+            'date_added': timezone.now(),
         }
     ]
     for review_data in reviews_data:
