@@ -14,6 +14,17 @@
        clear: both;
        display: table;
     }
+    .index-list-item {
+        background-color: lightblue;
+        color: white;
+        padding: .5rem 1rem;
+        margin-bottom: .5rem;
+        border-radius: .5rem;
+        text-align: center;
+    }
+    .index-list-item:hover {
+        background-color: #0b5ed7;
+    }
  </style>
 <h1>HOMEPAGE WOOHOOO</h1>
 <div class="row">
@@ -22,7 +33,7 @@
        {% if artists %}
         <ul>
         {% for artist in artists %}
-            <li class="list-group-item">
+            <li class="list-group-item index-list-item">
                 <a href="{{ artist.url }}" class="text-decoration-none text-dark d-flex align-items-center">
                     <img src="{{ artist.artist.picture.url }}" alt="{{ artist.name }}" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
                     <span class="fw-bold">{{ artist.name }}</span>
@@ -39,7 +50,7 @@
        {% if albums %}
         <ul>
         {% for album in albums %}
-            <li class="list-group-item">
+            <li class="list-group-item index-list-item">
                 <a href="{{ album.url }}" class="text-decoration-none text-dark d-flex align-items-center">
                     <img src="{{ album.album.picture.url }}" alt="{{ album.name }}" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
                     <span class="fw-bold">{{ album.name }}</span>
@@ -55,7 +66,7 @@
        {% if songs %}
         <ul>
         {% for song in songs %}
-        <li class="list-group-item">
+        <li class="list-group-item index-list-item">
             <a href="{{ song.url }}" class="text-decoration-none text-dark d-flex align-items-center">
                 <img src="{{ song.song.artist.picture.url }}" alt="{{ song.name }}" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
                     <span class="fw-bold">{{ song.name }}</span>
