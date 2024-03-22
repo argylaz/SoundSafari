@@ -264,7 +264,7 @@ def create_user_profiles():
         }
     ]
 
-    images = ['images/John.jpg', 'images/Maria.jpg', None]
+    images = ['images/Maria.jpg', 'images/John.jpg', None]
 
     for i, user_data in enumerate(users_data):
         user = User.objects.create_user(**user_data)
