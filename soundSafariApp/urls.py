@@ -12,7 +12,8 @@ urlpatterns = [
     path('genres/', views.genres, name='genres'),
     path('genres/add/', views.add_genre, name='add_genre'),
     #Forms
-    path('genres/<slug:artist_name_slug>/<slug:song_name_slug>/', views.show_songsgl, name='show_songsgl'),
+    path('genres/<slug:artist_name_slug>/<slug:song_name_slug>/', views.show_single, name='show_single_genre'),
+    path('genres/<slug:song_name_slug>/add_review/', views.add_song_review, name='add_song_review'),
 
     #URLS for Account Things
     path('register/', views.register, name='register'),
@@ -26,9 +27,10 @@ urlpatterns = [
     path('artists/<slug:artist_name_slug>/', views.show_artist, name='show_artist'),
     path('artists/<slug:artist_name_slug>/<slug:album_name_slug>/', views.show_album, name='show_album'),
     path('artists/<slug:artist_name_slug>/<slug:album_name_slug>/<slug:song_name_slug>/', views.show_song, name='show_song'),
-    path('artists/<slug:artist_name_slug>/<slug:song_name_slug>/', views.show_songsgl, name='show_songsgl'),
+    path('genres/<slug:artist_name_slug>/<slug:song_name_slug>/', views.show_single, name='show_single_genre'),
     #Forms
-    path('artists/<slug:artist_name_slug>/add_album', views.add_album, name='add_album'),
-    path('artists/add_artist', views.add_artist, name='add_artist'),
+    path('artists/<slug:artist_name_slug>/add_album/', views.add_album, name='add_album'),
+    path('artists/add_artist/', views.add_artist, name='add_artist'),
+    path('artists/<slug:artist_name_slug>/add_review_artist/', views.add_artist_review, name='add_artist_review')
 
 ]

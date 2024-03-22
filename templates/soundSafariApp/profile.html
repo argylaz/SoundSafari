@@ -6,7 +6,7 @@
         <!-- User Profile Column -->
         <div class="col-md-4">
             <div class="text-center">
-                <img src="{{ user.picture.url }}" alt="{{ user.username }}" class="img-fluid rounded-circle">
+                <img src="{{ user.userprofile.picture.url }}" alt="{{ user.username }}" class="img-fluid rounded-circle">
                 <h2>{{ user.username }}</h2>
                 <p>Joined: {{ user.date_joined|date:"Y-m-d" }}</p>
             </div>
