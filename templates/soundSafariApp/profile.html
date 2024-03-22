@@ -1,29 +1,39 @@
 {% extends 'soundSafariApp/base.html' %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-{% load static %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>User Profile</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to CSS file for styling -->
-</head>
-<body>
-    <div class="profile-container">
-        <h1>Profile</h1>
-        <div class="profile-picture">
-            <img src="default-profile.png" id="profilePic" alt="Profile Picture">
-            <input type="file" id="imageUpload" accept="image/*">
+{% block body_block %}
+<div class="container mt-4">
+    <div class="row">
+        <!-- User Profile Column -->
+        <div class="col-md-4">
+            <div class="text-center">
+                <img src="{{ user.profile.picture.url }}" alt="{{ user.username }}" class="img-fluid rounded-circle">
+                <h2>{{ user.username }}</h2>
+                <p>Joined: {{ user.date_joined|date:"Y-m-d" }}</p>
+            </div>
         </div>
-        <div class="profile-details">
-            <p><strong>Name:</strong> <span id="userName">{{ user_name }}</span></p>
-            <p><strong>Date Created:</strong> <span id="dateCreated">{{ date_created }}</span></p>
 
+        <!-- Additional User Details Column -->
+        <div class="border rounded p-3 mb-4">
+            <p>{{ user.userprofile.bio }}</p>
+        </div>
+        
+            
+            <!-- Example of showing user-specific content like playlists or favorites -->
+            <h3>Favorites</h3>
+            <div class="list-group">
+                {% for song in user.profile.favorites %}
+                    <a href="#" class="list-group-item list-group-item-action">
+                        {{ song.name }} - {{ song.artist.name }}
+                    </a>
+                {% empty %}
+                    <p>No favorites added yet.</p>
+                {% endfor %}
+            </div>
+            <div class="text-center mt-4">
+                <a href="{% url 'soundSafariApp:edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+            </div>
+            
         </div>
     </div>
-
-    <script src="script.js"></script> <!-- Link to JavaScript file -->
-</body>
-</html>
+</div>
+{% endblock %}
