@@ -7,6 +7,13 @@
     padding: 0.25em 0.6em; 
 }
 </style>
+
+{% if user.is_authenticated %}
+<div class="mb-4">
+    <a href="{% url 'soundSafariApp:add_song' artist_name_slug=album.artist.slug %}" class="btn btn-primary">Add Song to Album</a>
+</div>
+{% endif %}
+
 <div class="container py-5">
     <!-- Album Information -->
     <div class="row mb-4 align-items-center">

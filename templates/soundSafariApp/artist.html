@@ -36,7 +36,8 @@
             </div>
 
             {% if user.is_authenticated %}
-                    <h3>Singles - <a href="">Add Single</a> </h3>
+                    <h3>Singles - <a href="{% url 'soundSafariApp:add_song' artist_name_slug=artist.slug %}">Add Single</a></h3>
+
                     {%else%}
                     <h3>Singles</h3>
                     {%endif%}
