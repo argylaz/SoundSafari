@@ -229,7 +229,8 @@ def edit_profile(request):
         form = EditProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
         if form.is_valid():
             form.save()
-            return redirect('soundSafariApp:user_profile')
+            return redirect('soundSafariApp:user_profile', username=request.user.username)
+
     else:
         form = EditProfileForm(instance=request.user.userprofile)
     return render(request, 'soundSafariApp/edit_profile.html', {'form': form})

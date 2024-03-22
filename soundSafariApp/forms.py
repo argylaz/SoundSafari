@@ -82,3 +82,5 @@ class EditProfileForm(forms.ModelForm):
             'bio': forms.Textarea(attrs={'class': 'form-control', 'rows': 5}), 
             'picture': forms.FileInput(attrs={'class': 'form-control'}),
         }
+
+        

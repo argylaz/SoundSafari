@@ -134,7 +134,7 @@ class Page(models.Model):
 
 
     name = models.CharField(max_length=30, default='No Name') # Name of album/Song/Artist associated with the page for use in Page.objects.get()
-    avg_rating = models.IntegerField(default=0)            # Just a starting value of 0 when there are no reviews
+    avg_rating = models.IntegerField(default=0)               # Just a starting value of 0 when there are no reviews
     url = models.URLField(null=True)
 
     # Calculates the average rating of the page 
@@ -144,8 +144,9 @@ class Page(models.Model):
         count = reviews.count()
         if count != 0:
             self.avg_rating = sum([r.rating for r in reviews]) / count
+            print(self.avg_rating)
 
-        self.save() 
+        self.save()
 
 
     # Ensuring that two of the foreign keys are null
@@ -186,9 +187,10 @@ class Review(models.Model):
 
     # Overriding save method to call the method that calculates the average rating for the page
     def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
         self.page.calc_avg()
         
-        super().save(*args, **kwargs)
 
     def __str__(self):
         return "Rating: " + str(self.rating) + '\n' + "Comment: " + str(self.comment)
