@@ -151,9 +151,8 @@ def create_user_profiles():
     images = ['images/John.jpg', 'images/Maria.jpg', None]
 
     for i, user_data in enumerate(users_data):
-        if not User.objects.get(username=user_data['username']):
-            user = User.objects.create_user(**user_data)
-            UserProfile.objects.create(user=user, picture=images[i])
+        user = User.objects.create_user(**user_data)
+        UserProfile.objects.create(user=user, picture=images[i])
 
 def create_reviews():
     reviews_data = [
