@@ -1,6 +1,12 @@
 {% extends 'soundSafariApp/base.html' %}
 
 {% block body_block %}
+<style>
+    .rating-badge-large {
+    font-size: 1.5em; 
+    padding: 0.25em 0.6em; 
+}
+</style>
 <div class="container py-5">
     <!-- Album Information -->
     <div class="row mb-4 align-items-center">
@@ -36,15 +42,26 @@
         {%endif%}
         
         {% for review in reviews %}
-            <div class="card mb-2">
-                <div class="card-body">
-                    <h5 class="card-title">{{ review.user.username }}</h5>
+        <div class="card mb-3">
+            <div class="card-body d-flex">
+                <!-- Rating -->
+                <div class="me-3">
+                    <span class="badge bg-success rounded-pill rating-badge-large">{{ review.rating }}</span>
+                </div>
+                <div class="flex-shrink-0">
+                    <img src="{{ review.user.picture.url }}" alt="{{ review.user.username }}" class="rounded-circle" style="width: 50px; height: 50px;">
+                </div>
+
+                <div class="ms-3">
+                    <h5 class="card-title">{{ review.user.user.username }}</h5>
                     <p class="card-text">{{ review.comment }}</p>
+                    <p class="text-muted"><small>{{ review.date_added }}</small></p>
                 </div>
             </div>
-        {% empty %}
-            <p class="text-muted">No reviews yet.</p>
-        {% endfor %}
+        </div>
+    {% empty %}
+        <p class="text-muted">No reviews yet.</p>
+    {% endfor %}
     </div>
 </div>
 {% endblock %}

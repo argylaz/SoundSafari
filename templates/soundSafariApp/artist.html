@@ -50,28 +50,36 @@
                 {% endfor %}
             </div>
             
-            <div class="row mt-4">
-                <div class="col-12">
-                    {% if user.is_authenticated %}
-                    <h3>Reviews - <a href="">Add Review</a> </h3>
-                    {%else%}
-                    <h3>Reviews</h3>
-                    {%endif%}
-                    <div class="border rounded p-3">
-                    {%if reviews%}
-                        {% for review in reviews %}
-                            <div class="media mb-3">
-                                <img src="{{ review.user.picture.url }}" alt="{{ review.user.name }}" class="mr-3 rounded-circle" style="width: 48px; height: 48px;">
-                                <div class="media-body">
-                                    <h5 class="mt-0">{{ review.user.user.username }} - Rating {{review.rating}}</h5>
-                                    {{ review.comment }}
-                                </div>
-                            </div>
-                        {% endfor %}
-                    {%else%}
-                    <strong>No Reviews yet</strong>
-                    {%endif%}
+            <div class="mt-4">
+                {% if user.is_authenticated %}
+                    <h3>{{ reviews.count }} Reviews - <a href="">Add Review</a></h3>
+                {% else %}
+                    <h3>{{ reviews.count }} Reviews</h3>
+                {% endif %}
+                
+                {% for review in reviews %}
+                <div class="card mb-3">
+                    <div class="card-body d-flex">
+                        <!-- Rating -->
+                        <div class="me-3">
+                            <span class="badge bg-success rounded-pill rating-badge-large">{{ review.rating }}</span>
+                        </div>
+                        <!-- User Profile Picture -->
+                        <div class="flex-shrink-0">
+                            <img src="{{ review.user.picture.url }}" alt="{{ review.user.username }}" class="rounded-circle" style="width: 50px; height: 50px;">
+                        </div>
+                        <!-- Review Text and User Info -->
+                        <div class="ms-3">
+                            <h5 class="card-title">{{ review.user.user.username }}</h5>
+                            <p class="card-text">{{ review.comment }}</p>
+                            <p class="text-muted"><small>{{ review.date_added }}</small></p>
+                        </div>
                     </div>
+                </div>
+                {% empty %}
+                    <p class="text-muted">No reviews yet.</p>
+                {% endfor %}
+            </div>
         </div>
     
     </div>

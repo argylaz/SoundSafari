@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from soundSafariApp.models import Artist, UserProfile, Song, Genre, Album, Review, Page
-from soundSafariApp.forms import UserForm, UserProfileForm, GenreForm, EditProfileForm, AlbumForm
+from soundSafariApp.forms import UserForm, UserProfileForm, GenreForm, EditProfileForm, AlbumForm, ArtistForm, User
 
 # Create your views here.
 
@@ -138,7 +138,7 @@ def show_album(request, artist_name_slug, album_name_slug):
         context_dict['page']=None
     return render(request, 'soundSafariApp/album.html', context_dict)
 
-def show_song(request, artist_name_slug, album_name_slug, song_name_slug):
+def show_song(request, artist_name_slug, album_name_slug , song_name_slug):
     context_dict={}
     try:
         song=Song.objects.get(slug=song_name_slug)
@@ -186,6 +186,21 @@ def add_genre(request):
     
     return render(request, 'soundSafariApp/add_genre.html', {'form': form})
 
+@login_required
+def add_artist(request):
+    form = ArtistForm()
+
+    if request.method == 'POST':
+        form = ArtistForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('/soundsafari/artists/')
+        else:
+            print(form.errors)
+    
+    return render(request, 'soundSafariApp/add_artist.html', {'form': form})
+
 
 @login_required
 def user_logout(request):
@@ -196,7 +211,7 @@ def user_logout(request):
 def user_profile(request, username):
     context_dict={}
     try:
-        user=UserProfile.objects.get(user=username)
+        user=User.objects.get(user=username)
         reviews=Review.objects.filter(user=user)
         #context_dict['user']=user
         context_dict['reviews']=reviews

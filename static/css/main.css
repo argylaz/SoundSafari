@@ -40,3 +40,8 @@ body {
     padding: 0;
     margin: 0;
   }
+
+  .rating-badge-large {
+    font-size: 1.5em; 
+    padding: 0.25em 0.6em; 
+}

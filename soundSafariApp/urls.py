@@ -29,5 +29,6 @@ urlpatterns = [
     path('artists/<slug:artist_name_slug>/<slug:song_name_slug>/', views.show_songsgl, name='show_songsgl'),
     #Forms
     path('artists/<slug:artist_name_slug>/add_album', views.add_album, name='add_album'),
+    path('artists/add_artist', views.add_artist, name='add_artist'),
 
 ]
