@@ -9,7 +9,7 @@ class ArtistsAdmin(admin.ModelAdmin):
     list_display=('name')
 
 class SongAdmin(admin.ModelAdmin):
-    list_display=('name', 'duration', 'album')
+    list_display=('name', 'duration', 'album', 'genre')
     prepopulated_fields={'slug':('name',)}
 
 class GenreAdmin(admin.ModelAdmin):

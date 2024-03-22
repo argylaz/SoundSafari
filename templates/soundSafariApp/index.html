@@ -18,38 +18,38 @@
 <h1>HOMEPAGE WOOHOOO</h1>
 <div class="row">
     <div class="column">
-       <h2>Top Liked Artists</h2>
-       {% if pages %}
+       <h2>Top Rated Artists</h2>
+       {% if artists %}
         <ul>
-        {% for page in pages %}
-            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% for artist in artists %}
+            <li><a href="{{ page.url }}">{{ artist.name }}</a></li>
         {% endfor %}
         </ul>
     {% else %}
-        <strong>There are no pages present.</strong>
+        <strong>There are no artists present.</strong>
     {% endif %}
     </div>
     <div class="column">
-       <h2>Top liked Albums</h2>
-       {% if pages %}
+       <h2>Top Rated Albums</h2>
+       {% if albums %}
         <ul>
-        {% for page in pages %}
-            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% for album in albums %}
+            <li><a href="{{ page.url }}">{{ album.name }}</a></li>
         {% endfor %}
         </ul>
         {% else %}
-            <strong>There are no pages present.</strong>
+            <strong>There are no albums present.</strong>
         {% endif %}</div>
     <div class="column">
-       <h2>Top Liked Songs</h2>
-       {% if pages %}
+       <h2>Top Rated Songs</h2>
+       {% if songs %}
         <ul>
-        {% for page in pages %}
-            <li><a href="{{ page.url }}">{{ page.title }}</a></li>
+        {% for song in songs %}
+            <li><a href="{{ page.url }}">{{ song.name }}</a></li>
         {% endfor %}
         </ul>
         {% else %}
-            <strong>There are no pages present.</strong>
+            <strong>There are no Songs present.</strong>
         {% endif %}</div>
  </div>
 {% endblock %}

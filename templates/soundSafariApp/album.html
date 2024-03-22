@@ -1,31 +1,51 @@
 {% extends 'soundSafariApp/base.html' %}
 
 {% block body_block %}
-<div class="album-detail">
-    <div class="album-info">
-        <img src="{{ album.picture.url }}" alt="{{ album.title }}">
-        <h2>{{ album.name }}</h2>
-        <p>{{ album.artist }}</p>
-        <p>{{ album.release_date }}</p>
-        <p> {{ songs.count }}songs, {{ album.duration }}</p>
+<div class="container py-5">
+    <!-- Album Information -->
+    <div class="row mb-4 align-items-center">
+        <div class="col-md-4">
+            <img src="{{ album.picture.url }}" alt="{{ album.name }}" class="img-fluid rounded shadow">
+        </div>
+        <div class="col-md-8">
+            <h2 class="mb-1">{{ album.name }}</h2>
+            <p class="text-muted mb-1">{{ album.artist }}</p>
+            <p class="text-muted">{{ album.release_date|date:"Y-m-d" }}</p>
+            <p>{{ songs.count }} songs, {{ album.duration }} minutes</p>
+        </div>
     </div>
-    <div class="song-list">
+    
+    <!-- Song List -->
+    <div class="list-group mb-4">
         {% for song in songs %}
-            <div class="song">
-                <a href="#">{{ song.title }}</a>
-                <span>{{ song.duration }}</span>
-            </div>
+            <a href="{% url 'soundSafariApp:show_song' artist_name_slug=album.artist.slug album_name_slug=album.slug song_name_slug=song.slug %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                <div><b>{{ song.name }}</b></div>
+                <span class="badge bg-secondary rounded-pill">{{ song.duration }} secs</span>
+            </a>
+        {% empty %}
+            <p class="text-muted">No songs available.</p>
         {% endfor %}
     </div>
-    <div class="comments-section">
-        <h3>{{ comments.count }} Comments</h3>
-        {% for comment in comments %}
-            <div class="comment">
-                <strong>{{ comment.user.username }}</strong>
-                <p>{{ comment.text }}</p>
+    
+    <!-- Comments Section -->
+    <div>
+        {% if user.is_authenticated %}
+            <h3>{{ reviews.count }} Reviews - <a href="">Add Review</a> </h3>
+        {%else%}
+            <h3>{{ reviews.count }} Reviews</h3>
+        {%endif%}
+        
+        {% for review in reviews %}
+            <div class="card mb-2">
+                <div class="card-body">
+                    <h5 class="card-title">{{ review.user.username }}</h5>
+                    <p class="card-text">{{ review.comment }}</p>
+                </div>
             </div>
+        {% empty %}
+            <p class="text-muted">No reviews yet.</p>
         {% endfor %}
-        <!-- Add comment form -->
     </div>
 </div>
 {% endblock %}
+
