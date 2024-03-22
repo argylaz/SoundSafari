@@ -170,6 +170,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_created = models.DateField(null=True,default=None)
     picture = models.ImageField(default="images/defaultUsrImg.jpg")
+    bio = models.TextField(blank=True, null=True) 
+
 
     def __str__(self):
         return self.user.username
