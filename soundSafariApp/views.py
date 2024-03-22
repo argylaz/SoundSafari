@@ -6,13 +6,26 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from soundSafariApp.models import Artist, UserProfile, Song, Genre, Album, Review, Page
-from soundSafariApp.forms import UserForm, UserProfileForm, GenreForm, EditProfileForm, AlbumForm, ArtistForm, User, ReviewForm
+from soundSafariApp.forms import UserForm, UserProfileForm, GenreForm, EditProfileForm, AlbumForm, ArtistForm, User,SongForm, ReviewForm
 from django.utils import timezone
 
 # Create your views here.
 
 def index(request):
-    return render(request, 'soundSafariApp/index.html')
+    contextdict = {}
+    # Get top rated artists
+    TR_artists = Page.objects.filter(artist__isnull=False).order_by('-avg_rating')[:7]
+    contextdict['artists'] = TR_artists
+
+    # Get top rated albums
+    TR_albums = Page.objects.filter(album__isnull=False).order_by('-avg_rating')[:7]
+    contextdict['albums'] = TR_albums
+
+    # Get top rated songs
+    TR_songs = Page.objects.filter(song__isnull=False).order_by('-avg_rating')[:7]
+    contextdict['songs'] = TR_songs
+
+    return render(request, 'soundSafariApp/index.html', contextdict)
 
 def user_login(request):
     if request.method == 'POST':
@@ -288,3 +301,45 @@ def edit_profile(request):
     else:
         form = EditProfileForm(instance=request.user.userprofile)
     return render(request, 'soundSafariApp/edit_profile.html', {'form': form})
+
+
+@login_required
+def add_song(request, artist_name_slug, album_name_slug=None):
+    try:
+        artist = Artist.objects.get(slug=artist_name_slug)
+    except Artist.DoesNotExist:
+        artist = None
+        context = {'error_message': 'The specified artist does not exist.'}
+        return render(request, 'soundSafariApp/add_song.html', context)
+    
+    album = None
+    if album_name_slug:
+        try:
+            album = Album.objects.get(slug=album_name_slug, artist=artist)
+        except Album.DoesNotExist:
+            album = None
+            # Optionally, add a message about the album not existing
+
+    if request.method == 'POST':
+        form = SongForm(request.POST)
+        if form.is_valid():
+            if artist:  # Ensure artist exists
+                song = form.save(commit=False)
+                song.artist = artist
+                if album:  # If adding to an album, set the album
+                    song.album = album
+                song.save()
+                # Redirect after POST
+                return redirect('soundSafariApp:show_artist', artist_name_slug=artist.slug)
+
+    else:
+        form = SongForm()
+
+    context = {
+        'form': form,
+        'artist': artist,
+        'album': album,
+    }
+    if artist:
+        context['artist_name_slug'] = artist.slug
+    return render(request, 'soundSafariApp/add_song.html', context)

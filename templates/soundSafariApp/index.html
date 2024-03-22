@@ -7,22 +7,48 @@
        width: 33.33%;
        padding: 10px;
        box-sizing: border-box;
-       background-color: lightgreen;
+       background-color: darkblue;
     }
     .row::after {
        content: "";
        clear: both;
        display: table;
     }
+    .index-list-item {
+        background-color: lightblue;
+        color: white;
+        padding: .5rem 1rem;
+        margin-bottom: .5rem;
+        border-radius: .5rem;
+        text-align: center;
+    }
+    .index-list-item:hover {
+        background-color: #0b5ed7;
+    }
+    .header {
+        background-color: whitesmoke;
+        border-radius: .5rem;
+        text-align: center;
+    }
  </style>
-<h1>HOMEPAGE WOOHOOO</h1>
+<div class="header">
+    <h1>HOMEPAGE</h1>
+</div>
 <div class="row">
     <div class="column">
-       <h2>Top Rated Artists</h2>
+       <div class="header">
+        <h2>Top Rated Artists</h2>
+       </div>
        {% if artists %}
         <ul>
         {% for artist in artists %}
-            <li><a href="{{ page.url }}">{{ artist.name }}</a></li>
+            <li class="list-group-item index-list-item">
+                <a href="{{ artist.url }}" class="text-decoration-none text-dark d-flex justify-content-between align-items-center">
+                    <img src="{{ artist.artist.picture.url }}" alt="{{ artist.name }}" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                    <span class="fw-bold">{{ artist.name }}</span>
+                    <span class="fw-bold">{{ artist.avg_rating }}</span>
+                </a>
+            </li>
         {% endfor %}
         </ul>
     {% else %}
@@ -30,22 +56,38 @@
     {% endif %}
     </div>
     <div class="column">
-       <h2>Top Rated Albums</h2>
+       <div class="header">
+        <h2>Top Rated Albums</h2>
+       </div>
        {% if albums %}
         <ul>
         {% for album in albums %}
-            <li><a href="{{ page.url }}">{{ album.name }}</a></li>
+            <li class="list-group-item index-list-item">
+                <a href="{{ album.url }}" class="text-decoration-none text-dark d-flex justify-content-between align-items-center">
+                    <img src="{{ album.album.picture.url }}" alt="{{ album.name }}" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                    <span class="fw-bold">{{ album.name }}</span>
+                    <span class="fw-bold">{{ album.avg_rating }}</span>
+                </a>
+            </li>
         {% endfor %}
         </ul>
         {% else %}
             <strong>There are no albums present.</strong>
         {% endif %}</div>
     <div class="column">
-       <h2>Top Rated Songs</h2>
+        <div class="header">
+         <h2>Top Rated Songs</h2>
+        </div>
        {% if songs %}
         <ul>
         {% for song in songs %}
-            <li><a href="{{ page.url }}">{{ song.name }}</a></li>
+        <li class="list-group-item index-list-item">
+            <a href="{{ song.url }}" class="text-decoration-none text-dark d-flex justify-content-between align-items-center">
+                <img src="{{ song.song.artist.picture.url }}" alt="{{ song.name }}" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                    <span class="fw-bold">{{ song.name }}</span>
+                    <span class="fw-bold">{{ song.avg_rating }}</span>
+            </a>
+        </li>
         {% endfor %}
         </ul>
         {% else %}

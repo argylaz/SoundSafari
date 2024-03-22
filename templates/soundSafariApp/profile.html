@@ -1,40 +1,51 @@
 {% extends 'soundSafariApp/base.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock css %}
 
 {% block body_block %}
+
 <div class="container mt-4">
-    <div class="row">
-        <!-- User Profile Column -->
-        <div class="col-md-4">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <!-- User Profile Column -->
             <div class="text-center">
                 <img src="{{ user.userprofile.picture.url }}" alt="{{ user.username }}" class="img-fluid rounded-circle">
                 <h2>{{ user.username }}</h2>
                 <p>Joined: {{ user.date_joined|date:"Y-m-d" }}</p>
             </div>
-        </div>
-
-        <!-- Additional User Details Column -->
-        <div class="border rounded p-3 mb-4">
-            <p>{{ user.userprofile.bio }}</p>
-        </div>
-        
-            
-            <!-- Example of showing user-specific content like playlists or favorites -->
-            <h3>Reviews</h3>
-            <div class="list-group">
-                {%if reviews%}
-                {% for review in reviews %}
-                    <p>{{ review.comment }}</p>
-                            
-                {% endfor %}
-            {%else%}
-            <strong>No Reviews yet</strong>
-            {%endif%}
+            <!-- Additional User Details Column -->
+            <div class="border rounded p-3 mb-4 text-center">
+                <p>{{ user.userprofile.bio }}</p>
             </div>
+            <!-- Edit Profile Button -->
             <div class="text-center mt-4">
                 <a href="{% url 'soundSafariApp:edit_profile' %}" class="btn btn-primary">Edit Profile</a>
             </div>
-            
         </div>
     </div>
-</div>
+    <!-- Reviews Section -->
+    <div class="row justify-content-center">
+        <div class="col-md-8"> <!-- Adjust the col-md-8 to your preferred width -->
+            <h3 class="text-center">Reviews</h3>
+            <div class="list-group">
+                {% if reviews %}
+                {% for review in reviews %}
+                    <div class="text-center"> <!-- Center each review text -->
+                        <p>{{ review.comment }}</p>
+                    </div>
+                {% endfor %}
+                {% else %}
+                <div class="text-center"> <!-- Center the "No Reviews" text -->
+                    <strong>No Reviews yet</strong>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% block javascript %}
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock javascript %}
 {% endblock %}
