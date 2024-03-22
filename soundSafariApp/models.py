@@ -20,7 +20,7 @@ class Genre(models.Model):
 class Artist(models.Model):
     name = models.CharField(max_length=30)
     birthDate=models.DateField(null=True,default=None)
-    picture = models.ImageField()
+    picture = models.ImageField(upload_to='media/images/')
     slug = models.SlugField(unique=True, blank=True)
 
     # Creating a page for the artist
@@ -50,7 +50,7 @@ class Album(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, null=True)
 
     name = models.CharField(max_length=30)
-    picture = models.ImageField()
+    picture = models.ImageField(upload_to='media/images/')
     duration = models.IntegerField(default = 0)
     release_date = models.DateField(null=True,default=None)
     slug = models.SlugField(null=True, unique = True)
@@ -147,7 +147,7 @@ class Page(models.Model):
         self.save() 
 
 
-    # Overriding the clean method to also ensure that two of the foreign keys are null
+    # Ensuring that two of the foreign keys are null
     # and exactly one of them is not null
     def clean(self):
         super().clean()
@@ -169,7 +169,7 @@ class Page(models.Model):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_created = models.DateField(null=True,default=None)
-    picture = models.ImageField(default="static/images/defaultUsrImg.jpg")
+    picture = models.ImageField(default="images/defaultUsrImg.jpg")
 
     def __str__(self):
         return self.user.username

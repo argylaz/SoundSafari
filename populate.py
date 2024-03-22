@@ -17,17 +17,17 @@ def create_artists():
         {
             'name': 'The Weeknd',
             'birthDate': timezone.datetime(1990, 2, 16),
-            'picture': 'static/images/TheWeeknd.jpg',
+            'picture': 'images/TheWeeknd.jpg',
         },
         {
             'name': 'Taylor Swift',
             'birthDate': timezone.datetime(1989, 12, 13),
-            'picture': 'static/images/TaylorSwift.jpg',
+            'picture': 'images/TaylorSwift.jpg',
         },
         {
             'name': 'Eminem', 
             'birthDate': timezone.datetime(1972, 10, 17),
-            'picture': 'static/images/Eminem.jpg',
+            'picture': 'images/Eminem.jpg',
         }
     ]
     for artist_data in artists_data:
@@ -40,21 +40,21 @@ def create_albums():
             'genre': Genre.objects.get(name='Pop'),
             'artist': Artist.objects.get(name='The Weeknd'),
             'release_date': timezone.datetime(2020, 3, 20),
-            'picture': 'static/images/AfterHours.jpg',
+            'picture': 'images/AfterHours.jpg',
         },
         {
             'name': '1989 (Taylor\'s Version)',
             'genre': Genre.objects.get(name='Pop'),
             'artist': Artist.objects.get(name='Taylor Swift'),
             'release_date': timezone.datetime(2021, 11, 12),
-            'picture': 'static/images/1989.jpg',
+            'picture': 'images/1989.jpg',
         },
         {
             'name': 'The Eminem Show',
             'genre': Genre.objects.get(name='Hip-Hop'),
             'artist': Artist.objects.get(name='Eminem'),
             'release_date': timezone.datetime(200, 5, 26),
-            'picture': 'static/images/TheEminemShow.jpg',
+            'picture': 'images/TheEminemShow.jpg',
         }
     ]
     for album_data in albums_data:
@@ -148,7 +148,7 @@ def create_user_profiles():
         }
     ]
 
-    images = ['static/images/John.jpg', 'static/images/Maria.jpg', None]
+    images = ['images/John.jpg', 'images/Maria.jpg', None]
 
     for i, user_data in enumerate(users_data):
         if not User.objects.get(username=user_data['username']):
