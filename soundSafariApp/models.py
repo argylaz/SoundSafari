@@ -28,7 +28,7 @@ class Artist(models.Model):
     def create_page(self):
         page = {
             "artist" : self,
-            "url" : "soundsafari/artists/" + self.slug + '/',
+            "url" : "artists/" + self.slug + '/',
             "name" : self.name
         }
 
@@ -65,7 +65,7 @@ class Album(models.Model):
     def create_page(self):
         page = {
             "album" : self,
-            "url" : "soundsafari/artists/" + self.artist.slug + '/' + self.slug + '/',
+            "url" : "artists/" + self.artist.slug + '/' + self.slug + '/',
             "name" : self.name
         }
 
@@ -109,7 +109,7 @@ class Song(models.Model):
 
         page = {
             "song" : self,
-            "url" : "soundsafari/artists/" + self.artist.slug + '/' + path + '/',
+            "url" : "artists/" + self.artist.slug + '/' + path + '/',
             "name" : self.name
         }
 
