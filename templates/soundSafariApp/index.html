@@ -22,7 +22,12 @@
        {% if artists %}
         <ul>
         {% for artist in artists %}
-            <li><a href="{{ page.url }}">{{ artist.name }}</a></li>
+            <li class="list-group-item">
+                <a href="{{ artist.url }}" class="text-decoration-none text-dark d-flex align-items-center">
+                    <img src="{{ artist.artist.picture.url }}" alt="{{ artist.name }}" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                    <span class="fw-bold">{{ artist.name }}</span>
+                </a>
+            </li>
         {% endfor %}
         </ul>
     {% else %}
@@ -34,7 +39,12 @@
        {% if albums %}
         <ul>
         {% for album in albums %}
-            <li><a href="{{ page.url }}">{{ album.name }}</a></li>
+            <li class="list-group-item">
+                <a href="{{ album.url }}" class="text-decoration-none text-dark d-flex align-items-center">
+                    <img src="{{ album.album.picture.url }}" alt="{{ album.name }}" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                    <span class="fw-bold">{{ album.name }}</span>
+                </a>
+            </li>
         {% endfor %}
         </ul>
         {% else %}
@@ -45,7 +55,12 @@
        {% if songs %}
         <ul>
         {% for song in songs %}
-            <li><a href="{{ page.url }}">{{ song.name }}</a></li>
+        <li class="list-group-item">
+            <a href="{{ song.url }}" class="text-decoration-none text-dark d-flex align-items-center">
+                <img src="{{ song.song.artist.picture.url }}" alt="{{ song.name }}" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                    <span class="fw-bold">{{ song.name }}</span>
+            </a>
+        </li>
         {% endfor %}
         </ul>
         {% else %}

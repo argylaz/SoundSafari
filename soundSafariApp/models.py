@@ -28,7 +28,7 @@ class Artist(models.Model):
     def create_page(self):
         page = {
             "artist" : self,
-            "url" : "artist/" + self.slug,
+            "url" : "soundsafari/artists/" + self.slug + '/',
             "name" : self.name
         }
 
@@ -65,7 +65,7 @@ class Album(models.Model):
     def create_page(self):
         page = {
             "album" : self,
-            "url" : "album/" + self.slug,
+            "url" : "soundsafari/artists/" + self.artist.slug + '/' + self.slug + '/',
             "name" : self.name
         }
 
@@ -101,9 +101,15 @@ class Song(models.Model):
 
     # Creating a page for the song
     def create_page(self):
+        # Different path depending on whether the song is part of an album or not
+        if self.album:
+            path = self.album.slug + '/' + self.slug
+        else:
+            path = self.slug
+
         page = {
             "song" : self,
-            "url" : "song/" + self.slug,
+            "url" : "soundsafari/artists/" + self.artist.slug + '/' + path + '/',
             "name" : self.name
         }
 
@@ -144,7 +150,6 @@ class Page(models.Model):
         count = reviews.count()
         if count != 0:
             self.avg_rating = sum([r.rating for r in reviews]) / count
-            print(self.avg_rating)
 
         self.save()
 
