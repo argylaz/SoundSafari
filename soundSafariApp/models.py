@@ -184,7 +184,8 @@ class Review(models.Model):
 
     # Overriding save method to call the method that calculates the average rating for the page
     def save(self, *args, **kwargs):
-        self.full_clean()
+        self.page.calc_avg()
+        
         super().save(*args, **kwargs)
 
     def __str__(self):
