@@ -6,7 +6,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404
 from soundSafariApp.models import Artist, UserProfile, Song, Genre, Album, Review, Page
-from soundSafariApp.forms import UserForm, UserProfileForm, GenreForm
+from soundSafariApp.forms import UserForm, UserProfileForm, GenreForm, EditProfileForm, AlbumForm
 
 # Create your views here.
 
@@ -47,6 +47,21 @@ def genres(request):
     for genre in genreslist:
         songsdict[genre]=Song.objects.filter(genre=genre)
     return render(request, 'soundSafariApp/genres.html', {'genres':genreslist, 'songspergenre':songsdict, 'genre_form':genre_form})
+
+def show_songsgl(request, artist_name_slug, song_name_slug):
+    context_dict={}
+    try:
+        song=Song.objects.get(slug=song_name_slug)
+        page=Page.objects.get(name=song.name)
+        reviews=Review.objects.filter(page=page)
+        context_dict['song']=song
+        context_dict['reviews']=reviews
+        context_dict['page']=page
+    except:
+        context_dict['song']=None
+        context_dict['reviews']=None
+        context_dict['page']=None
+    return render(request, 'soundSafariApp/songsgl.html', context_dict)
 
 def guide(request):
     return render(request, 'soundSafariApp/guide.html')
@@ -141,20 +156,36 @@ def show_song(request, artist_name_slug, album_name_slug, song_name_slug):
 
 
 
-
+@login_required
+def add_album(request, artist_name_slug):
+    artist = get_object_or_404(Artist, slug=artist_name_slug)
+    print(artist)
+    form = AlbumForm(request.POST, request.FILES)
+    if form.is_valid():
+        album = form.save(commit=False)
+        album.artist = artist
+        album.save()         
+        return redirect('soundSafariApp:artist_detail', artist_name_slug=artist.slug)
+    else:
+        print(form.errors)
+    
+    return render(request, 'soundSafariApp/add_album.html', {'form': form, 'artist': artist})
 
 @login_required
 def add_genre(request):
+    form = GenreForm()
+
     if request.method == 'POST':
         form = GenreForm(request.POST)
-        if form.is_valid():
-            new_genre = form.save()
-            # Redirect to a 'genre_detail' view, or wherever you wish
-            return redirect(reverse('genres', args=[new_genre.id]))
-    else:
-        form = GenreForm()
 
-    return render(request, 'soundSafariApp/genres.html', {'form': form})
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('/soundsafari/genres/')
+        else:
+            print(form.errors)
+    
+    return render(request, 'soundSafariApp/add_genre.html', {'form': form})
+
 
 @login_required
 def user_logout(request):
@@ -162,8 +193,18 @@ def user_logout(request):
     return redirect(reverse('soundSafariApp:index'))
 
 @login_required
-def user_profile(request):
-    return render(request, 'soundSafariApp/profile.html')
+def user_profile(request, username):
+    context_dict={}
+    try:
+        user=UserProfile.objects.get(user=username)
+        reviews=Review.objects.filter(user=user)
+        #context_dict['user']=user
+        context_dict['reviews']=reviews
+    except:
+        #context_dict['user']=None
+        context_dict['reviews']=None
+
+    return render(request, 'soundSafariApp/profile.html', context_dict)
 
 
 

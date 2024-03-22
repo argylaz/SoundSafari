@@ -2,6 +2,7 @@ from django.db import models
 from django.core.exceptions import ValidationError
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 # Create your models here.
 
@@ -168,10 +169,9 @@ class Page(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    date_created = models.DateField(null=True,default=None)
+    date_created = models.DateField(null=True,default=timezone.now)
     picture = models.ImageField(default="images/defaultUsrImg.jpg")
     bio = models.TextField(blank=True, null=True) 
-
 
     def __str__(self):
         return self.user.username
@@ -181,7 +181,7 @@ class Review(models.Model):
     page = models.ForeignKey(Page, on_delete=models.CASCADE, null=True)
 
     rating = models.IntegerField()
-    date_added = models.DateField(null=True,default=None)
+    date_added = models.DateField(null=True,default=timezone.now)
     comment = models.CharField(max_length=200, null=True) # Comment is optional 
 
     # Overriding save method to call the method that calculates the average rating for the page

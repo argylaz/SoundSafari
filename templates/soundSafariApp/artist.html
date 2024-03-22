@@ -16,7 +16,7 @@
         <!-- Albums and Singles Column -->
         <div class="col-md-8">
             {% if user.is_authenticated %}
-                    <h3>Album - <a href="">Add Album</a> </h3>
+                    <h3>Album - <a href="{% url 'soundSafariApp:add_album' artist_name_slug=artist.slug %}">Add Album</a> </h3>
                     {%else%}
                     <h3>Album</h3>
                     {%endif%}
@@ -42,7 +42,7 @@
                     {%endif%}
             <div class="list-group">
                 {% for song in songs %}
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="{% url 'soundSafariApp:show_songsgl' artist_name_slug=artist.slug song_name_slug=song.slug %}" class="list-group-item list-group-item-action">
                         <b>{{ song.name }} </b>- {{ song.duration }}secs - {{song.release_date}}
                     </a>
                 {% empty %}
@@ -63,7 +63,7 @@
                             <div class="media mb-3">
                                 <img src="{{ review.user.picture.url }}" alt="{{ review.user.name }}" class="mr-3 rounded-circle" style="width: 48px; height: 48px;">
                                 <div class="media-body">
-                                    <h5 class="mt-0">{{ review.user.username }} - Rating {{review.rating}}</h5>
+                                    <h5 class="mt-0">{{ review.user.user.username }} - Rating {{review.rating}}</h5>
                                     {{ review.comment }}
                                 </div>
                             </div>

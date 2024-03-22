@@ -14,7 +14,7 @@ class UserForm(forms.ModelForm):
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields=('date_created','picture')
+        fields=('picture',)
 
 class GenreForm(forms.ModelForm):
     name = forms.CharField(max_length=30, help_text="Please enter the genre name")
