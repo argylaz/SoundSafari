@@ -74,7 +74,7 @@
                 <div class="genre-songs d-none" id="genre-{{ genre.id }}">
                     <h3 class="text-center mt-4">{{ genre.name }}</h3>
                     {% for song in songs %}
-                    <a href="{% url 'soundSafariApp:show_songsgl' artist_name_slug=song.artist.slug song_name_slug=song.slug %}" class="text-decoration-none text-dark">
+                    <a href="{% url 'soundSafariApp:show_single_genre' artist_name_slug=song.artist.slug song_name_slug=song.slug %}" class="text-decoration-none text-dark">
                         <div class="card song-card">
                             <div class="card-body d-flex align-items-center">
                               <img src="{{ song.artist.picture.url }}" alt="" class="image-thumb me-3">

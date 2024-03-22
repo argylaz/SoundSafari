@@ -1,4 +1,4 @@
-from soundSafariApp.models import Album,Artist,Song,Genre,User, UserProfile
+from soundSafariApp.models import Album,Artist,Song,Genre,User,UserProfile, Page, Review
 from django.contrib.auth.models import User
 from django import forms
 
@@ -58,19 +58,19 @@ class SongForm(forms.ModelForm):
     class Meta:
         model = Song
         fields = ('name','duration','release_date','genre','artist','album')
-'''
+
 class ReviewForm(forms.ModelForm):
     rating = forms.IntegerField()
     date_added = forms.DateField(required=False, initial=None)
     comment= forms.CharField(max_length=200,required=False)
     user = forms.ModelChoiceField(queryset=User.objects.all())
-    page= forms.ModelChoiceIterator(queryset=Page.objects.all())
+    page= forms.ModelChoiceField(queryset=Page.objects.all())
 
     class Meta:
         model= Review
         fields=('rating','date_added','user','page','comment')
 
-'''
+
 
 class EditProfileForm(forms.ModelForm):
     username = forms.CharField(required=False)  

@@ -43,7 +43,7 @@
                     {%endif%}
             <div class="list-group">
                 {% for song in songs %}
-                    <a href="{% url 'soundSafariApp:show_songsgl' artist_name_slug=artist.slug song_name_slug=song.slug %}" class="list-group-item list-group-item-action">
+                    <a href="{% url 'soundSafariApp:show_single_genre' artist_name_slug=song.artist.slug song_name_slug=song.slug %}" class="list-group-item list-group-item-action">
                         <b>{{ song.name }} </b>- {{ song.duration }}secs - {{song.release_date}}
                     </a>
                 {% empty %}
@@ -53,7 +53,7 @@
             
             <div class="mt-4">
                 {% if user.is_authenticated %}
-                    <h3>{{ reviews.count }} Reviews - <a href="">Add Review</a></h3>
+                    <h3>{{ reviews.count }} Reviews - <a href="{% url 'soundSafariApp:add_artist_review' artist_name_slug=artist.slug %}">Add Review</a></h3>
                 {% else %}
                     <h3>{{ reviews.count }} Reviews</h3>
                 {% endif %}
