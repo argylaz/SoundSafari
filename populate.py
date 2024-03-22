@@ -261,14 +261,35 @@ def create_user_profiles():
             'password': 'password3',
             'email': 'MusicLover@gmail.com',
             'date_joined': timezone.now()
-        }
+        },
+        {
+            'username': 'BurgerKing123',
+            'password': 'cheeseburger',
+            'email': 'burgerlover@gmail.com',
+            'date_joined': timezone.now(),
+        },
+        {
+            'username': 'PizzaManiac22',
+            'password': 'pizzaparty',
+            'email': 'pizzalover@gmail.com',
+            'date_joined': timezone.now(),
+        },
+        {
+            'username': 'DancingPotato',
+            'password': 'potatodance',
+            'email': 'potatolover@gmail.com',
+            'date_joined': timezone.now(),
+        },
     ]
 
-    images = ['images/Maria.jpg', 'images/John.jpg', None]
+    images = ['images/Maria.jpg', 'images/John.jpg']
 
     for i, user_data in enumerate(users_data):
         user = User.objects.create_user(**user_data)
-        UserProfile.objects.create(user=user, picture=images[i])
+        if i < 2:
+            UserProfile.objects.create(user=user, picture=images[i])
+        else:
+            UserProfile.objects.create(user=user)
 
 def create_reviews():
     reviews_data = [
@@ -292,6 +313,48 @@ def create_reviews():
             'rating': 5,
             'date_added': timezone.now(),
             'comment': 'This song is a masterpiece! I\'ve been playing it on repeat.'
+        },
+        {
+            'user': UserProfile.objects.get(user__username='BurgerKing123'),
+            'page': Page.objects.get(name="The Eminem Show"),
+            'rating': 4,
+            'date_added': timezone.now(),
+            'comment': 'Classic album, never gets old!'
+        },
+        {
+            'user': UserProfile.objects.get(user__username='PizzaManiac22'),
+            'page': Page.objects.get(name='After Hours'),
+            'rating': 4,
+            'date_added': timezone.now(),
+            'comment': 'Great vibe, perfect for chilling!'
+        },
+        {
+            'user': UserProfile.objects.get(user__username='DancingPotato'),
+            'page': Page.objects.get(name='1989 (Taylor\'s Version)'),
+            'rating': 5,
+            'date_added': timezone.now(),
+            'comment': 'Feeling nostalgic, Taylor Swift never disappoints!'
+        },
+        {
+            'user': UserProfile.objects.get(user__username='BurgerKing123'),
+            'page': Page.objects.get(name="Love Story"),
+            'rating': 5,
+            'date_added': timezone.now(),
+            'comment': 'One of the best love songs ever written!'
+        },
+        {
+            'user': UserProfile.objects.get(user__username='PizzaManiac22'),
+            'page': Page.objects.get(name='Lose Yourself'),
+            'rating': 5,
+            'date_added': timezone.now(),
+            'comment': 'A true motivational anthem!'
+        },
+        {
+            'user': UserProfile.objects.get(user__username='DancingPotato'),
+            'page': Page.objects.get(name='Lemonade'),
+            'rating': 4,
+            'date_added': timezone.now(),
+            'comment': 'Powerful and empowering!'
         }
     ]
     for review_data in reviews_data:
