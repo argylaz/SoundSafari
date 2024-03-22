@@ -1,44 +1,115 @@
 {% extends 'soundSafariApp/base.html' %}
 
 {% block body_block %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
-{% load static %}
 <h1>Genres</h1>
-<div class="list-group">
-    <a href="#" class="list-group-item list-group-item-action active" aria-current="true">
-      The current link item
-    </a>
-    <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-    <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-    <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
-    <a href="#" class="list-group-item list-group-item-action disabled" tabindex="-1" aria-disabled="true">A disabled link item</a>
-  </div>
+{% load static %}
+<style>
+/* Add your custom styles here */
+.genre-card {
+    cursor: pointer;
+    transition: background-color .2s;
+}
+.genre-card:hover {
+    background-color: #e9ecef;
+}
+.song-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.genre-title {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+}
+.genre-list-item {
+    background-color: #0d6efd;
+    color: white;
+    padding: .5rem 1rem;
+    margin-bottom: .5rem;
+    border-radius: .5rem;
+    text-align: center;
+}
+.genre-list-item:hover {
+    background-color: #0b5ed7;
+}
+.genre-list-item.active {
+    background-color: #0a58ca;
+}
+.add-genre-btn {
+    font-size: 2rem;
+    line-height: 1;
+    color: #0d6efd;
+    text-align: center;
+}
+.add-genre-btn:hover {
+    color: #0b5ed7;
+    cursor: pointer;
+}
+.image-thumb {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+        }
+</style>
 
+<body>
+    <div class="container my-4">
+        <div class="row">
+            <div class="col-md-3">
+                <!-- Genres List -->
+                <h2 class="genre-header text-center">Genres</h2>
+                <ul class="list-group">
+                    {% for genre in genres %}
+                    <li class="list-group-item genre-list-item" data-genre-id="{{ genre.id }}">{{ genre.name }}</li>
+                    {% endfor %}
+                    {% if user.is_authenticated %}
+                    <li class="genre-add"><a href="">Add New Genre</a></li>
+                      {% endif %}
+                </ul>
+              </div>
+            <div class="col-md-9">
+                <!-- Songs List -->
+                {% for genre, songs in songspergenre.items %}
+                <div class="genre-songs d-none" id="genre-{{ genre.id }}">
+                    <h3 class="text-center mt-4">{{ genre.name }}</h3>
+                    {% for song in songs %}
+                    <a href="#" class="text-decoration-none text-dark">
+                        <div class="card song-card">
+                            <div class="card-body d-flex align-items-center">
+                              <img src="{{ song.artist.picture.url }}" alt="" class="image-thumb me-3">
+                                <div>
+                                    <h5 class="card-title">{{ song.name }}</h5>
+                                    <p class="card-text">{{ song.artist.name }}</p>
+                                    <p class="card-text">
+                                        Duration: {{ song.duration }} mins<br>
+                                        Released: {{ song.release_date }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
-<div class="d-flex flex-column flex-shrink-0 p-3 text-black bg-dark" style="width: 280px;">
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-          Home
-        </a>
-      </li>
-    {% if genres %}
-    {% for genre in genres %}
+    <!-- jQuery and Bootstrap Bundle with Popper -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.genre-list-item').on('click', function() {
+                var genreId = $(this).data('genre-id');
+                $('.genre-songs').addClass('d-none');
+                $('#genre-' + genreId).removeClass('d-none');
+                $('.genre-list-item').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
 
-      <li>
-        <a href="{{ genre.url }}" class="nav-link text-white">
-          <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-          {{ genre.title }}
-        </a>
-      </li>
-    {% endfor %}
-        </ul>
-    {% else %}
-            <strong>There are no genres present.</strong>
-    {% endif %}
-    </ul>    
-  </div>
-{% endblock %}
+</body>  
+{%endblock%}

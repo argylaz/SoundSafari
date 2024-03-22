@@ -96,7 +96,7 @@ class Song(models.Model):
     name = models.CharField(max_length=30)
     duration = models.IntegerField()
     release_date = models.DateField(null=True,default=None)
-    slug = models.SlugField(null=True, unique = True)
+    slug = models.SlugField(unique=True)
 
     # Creating a page for the song
     def create_page(self):
@@ -184,7 +184,7 @@ class Review(models.Model):
 
     # Overriding save method to call the method that calculates the average rating for the page
     def save(self, *args, **kwargs):
-        self.page.calc_avg()
+        self.full_clean()
         super().save(*args, **kwargs)
 
     def __str__(self):

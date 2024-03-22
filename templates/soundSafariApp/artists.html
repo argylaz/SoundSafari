@@ -1,11 +1,18 @@
-<!DOCTYPE html>
 {% extends 'soundSafariApp/base.html' %}
 
 {% block body_block %}
 <h1>Artists</h1>
-<ul>
-    {% for artist in Artists %}
-    <li><a href="{% url 'artist_detail' artist.slug %}">{{ artist.name }}</a></li>
-    {% endfor %}
-</ul>
-{% endblock %}
+<div class="container mt-3">
+    <ul class="list-group">
+        {% for artist in artists %}
+        <li class="list-group-item">
+            <a href="/soundsafari/artists/{{artist.slug}}/" class="text-decoration-none text-dark d-flex align-items-center">
+                <img src="{{ artist.picture.url }}" alt="{{ artist.name }}" class="rounded-circle me-3" style="width: 60px; height: 60px; object-fit: cover;">
+                <span class="fw-bold">{{ artist.name }}</span>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{%endblock%}

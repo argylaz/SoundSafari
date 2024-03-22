@@ -1,4 +1,4 @@
-from soundSafariApp.models import Album,Artist,Song,Genre,UserProfile,Page,Review
+from soundSafariApp.models import Album,Artist,Song,Genre,User, UserProfile
 from django.contrib.auth.models import User
 from django import forms
 
@@ -26,7 +26,7 @@ class GenreForm(forms.ModelForm):
 
 class ArtistForm(forms.ModelForm):
     name = forms.CharField(max_length=30, help_text="Please enter the Artist name")
-    birthDate = forms.DateField(null=True,default=None)
+    birthDate = forms.DateField(required=False, initial=None)
     picture = forms.ImageField()
 
     class Meta:
@@ -37,7 +37,7 @@ class AlbumForm(forms.ModelForm):
     name = forms.CharField(max_length=30, help_text="Please enter the album name")
     picture = forms.ImageField()
     duration = forms.IntegerField()
-    release_date = forms.DateField(null=True,default=None)
+    release_date = forms.DateField(required=False, initial=None)
     genre = forms.ModelChoiceField(queryset=Genre.objects.all())
     artist = forms.ModelChoiceField(queryset=Artist.objects.all())
     slug = forms.CharField(widget=forms.HiddenInput(),required=False)
@@ -49,7 +49,7 @@ class AlbumForm(forms.ModelForm):
 class SongForm(forms.ModelForm):
     name = forms.CharField(max_length=30, help_text="Please enter the song name")
     duration = forms.IntegerField()
-    release_date = forms.DateField(null=True,default=None)
+    release_date = forms.DateField(required=False, initial=None)
     genre = forms.ModelChoiceField(queryset=Genre.objects.all())
     artist = forms.ModelChoiceField(queryset=Artist.objects.all())
     album = forms.ModelChoiceField(queryset=Album.objects.all())
@@ -58,15 +58,16 @@ class SongForm(forms.ModelForm):
     class Meta:
         model = Song
         fields = ('name','duration','release_date','genre','artist','album')
-
-class ReviewFrom(forms.ModelForm):
+'''
+class ReviewForm(forms.ModelForm):
     rating = forms.IntegerField()
-    date_added = forms.DateField(null=True,default=None)
+    date_added = forms.DateField(required=False, initial=None)
     comment= forms.CharField(max_length=200,required=False)
     user = forms.ModelChoiceField(queryset=User.objects.all())
-    page= forms.ModelChoiceIterator(queryset=Page.obejects.all())
+    page= forms.ModelChoiceIterator(queryset=Page.objects.all())
 
     class Meta:
         model= Review
         fields=('rating','date_added','user','page','comment')
 
+'''
