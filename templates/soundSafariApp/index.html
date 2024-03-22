@@ -7,7 +7,7 @@
        width: 33.33%;
        padding: 10px;
        box-sizing: border-box;
-       background-color: lightgreen;
+       background-color: darkblue;
     }
     .row::after {
        content: "";
@@ -25,11 +25,20 @@
     .index-list-item:hover {
         background-color: #0b5ed7;
     }
+    .header {
+        background-color: whitesmoke;
+        border-radius: .5rem;
+        text-align: center;
+    }
  </style>
-<h1>HOMEPAGE WOOHOOO</h1>
+<div class="header">
+    <h1>HOMEPAGE</h1>
+</div>
 <div class="row">
     <div class="column">
-       <h2>Top Rated Artists</h2>
+       <div class="header">
+        <h2>Top Rated Artists</h2>
+       </div>
        {% if artists %}
         <ul>
         {% for artist in artists %}
@@ -47,7 +56,9 @@
     {% endif %}
     </div>
     <div class="column">
-       <h2>Top Rated Albums</h2>
+       <div class="header">
+        <h2>Top Rated Albums</h2>
+       </div>
        {% if albums %}
         <ul>
         {% for album in albums %}
@@ -64,7 +75,9 @@
             <strong>There are no albums present.</strong>
         {% endif %}</div>
     <div class="column">
-       <h2>Top Rated Songs</h2>
+        <div class="header">
+         <h2>Top Rated Songs</h2>
+        </div>
        {% if songs %}
         <ul>
         {% for song in songs %}
