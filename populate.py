@@ -8,7 +8,7 @@ from soundSafariApp.models import Genre, Artist, Album, Song, Page, UserProfile,
 from django.contrib.auth.models import User
 
 def create_genres():
-    genres = ['Pop', 'Rock', 'Heavy Metal', 'Hip-Hop', 'Electronic', 'Jazz']
+    genres = ['Pop', 'Rock', 'Heavy Metal', 'Hip-Hop', 'Electronic', 'Jazz', 'R&B']
     for genre_name in genres:
         Genre.objects.get_or_create(name=genre_name)
 
@@ -38,6 +38,16 @@ def create_artists():
             'name' : 'Hittman',
             'birthDate' : timezone.datetime(1985, 1, 1),
             'picture' : 'images/Hittman.jpg',
+        },
+        {
+            'name' : 'Ed Sheeran',
+            'birthDate' : timezone.datetime(1991, 2, 17),
+            'picture' : 'images/EdSheeran.jpg',
+        },
+        {
+            'name' : 'Beyonce',
+            'birthDate' : timezone.datetime(1981, 9, 4),
+            'picture' : 'images/Beyonce.jpg',
         }
     ]
     for artist_data in artists_data:
@@ -79,6 +89,20 @@ def create_albums():
             'artist' : Artist.objects.get(name='Hittman'),
             'release_date' : timezone.datetime(1984, 1, 1),
             'picture' : 'images/HittmanAlbum.jpg',
+        },
+        {
+            'name' : 'Divide',
+            'genre' : Genre.objects.get(name='Pop'),
+            'artist' : Artist.objects.get(name='Ed Sheeran'),
+            'release_date' : timezone.datetime(1984, 1, 1),
+            'picture' : 'images/%.jpg',
+        },
+        {
+            'name' : 'Lemonade',
+            'genre' : Genre.objects.get(name='Pop'),
+            'artist' : Artist.objects.get(name='Beyonce'),
+            'release_date' : timezone.datetime(1984, 1, 1),
+            'picture' : 'images/Lemonade.jpg',
         }
     ]
     for album_data in albums_data:
@@ -177,6 +201,42 @@ def create_songs():
         # Hittman Singles
         {'artist' : Artist.objects.get(name='Hittman'), 'name': 'Back Street Rebels', 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 279, 'release_date': timezone.datetime(1988, 1, 1)},
         {'artist' : Artist.objects.get(name='Hittman'), 'name': 'Dead on Arrival', 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 224, 'release_date': timezone.datetime(1988, 1, 1)},
+
+        # Ed Sheeran Divide Album Songs
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'Eraser', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 204, 'release_date': timezone.datetime(2017, 3, 3)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'Castle on the Hill', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 261, 'release_date': timezone.datetime(2017, 1, 6)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'Dive', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 229, 'release_date': timezone.datetime(2017, 3, 3)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'Shape of You', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 233, 'release_date': timezone.datetime(2017, 1, 6)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'Perfect', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 263, 'release_date': timezone.datetime(2017, 3, 3)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'Galway Girl', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 170, 'release_date': timezone.datetime(2017, 3, 17)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'Happier', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 207, 'release_date': timezone.datetime(2017, 3, 3)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'New Man', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 189, 'release_date': timezone.datetime(2017, 3, 3)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'Hearts Don\'t Break Around Here', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 235, 'release_date': timezone.datetime(2017, 3, 3)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'What Do I Know?', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 237, 'release_date': timezone.datetime(2017, 3, 3)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'How Would You Feel (Paean)', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 280, 'release_date': timezone.datetime(2017, 2, 17)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'Supermarket Flowers', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 221, 'release_date': timezone.datetime(2017, 3, 3)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'Barcelona', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 176, 'release_date': timezone.datetime(2017, 3, 3)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'Bibia Be Ye Ye', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 157, 'release_date': timezone.datetime(2017, 3, 3)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'Nancy Mulligan', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 186, 'release_date': timezone.datetime(2017, 3, 3)},
+        {'artist' : Artist.objects.get(name='Ed Sheeran'), 'name': 'Save Myself', 'album' : Album.objects.get(name='Divide'), 'genre' : Genre.objects.get(name='Pop'), 'duration': 258, 'release_date': timezone.datetime(2017, 3, 3)},
+
+        # Beyoncé's "Lemonade" Album Songs
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': 'Pray You Catch Me', 'album' : Album.objects.get(name='Lemonade'), 'genre' : Genre.objects.get(name='R&B'), 'duration': 224, 'release_date': timezone.datetime(2016, 4, 23)},
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': 'Hold Up', 'album' : Album.objects.get(name='Lemonade'), 'genre' : Genre.objects.get(name='R&B'), 'duration': 223, 'release_date': timezone.datetime(2016, 4, 23)},
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': 'Don\'t Hurt Yourself', 'album' : Album.objects.get(name='Lemonade'), 'genre' : Genre.objects.get(name='R&B'), 'duration': 222, 'release_date': timezone.datetime(2016, 4, 23)},
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': 'Sorry', 'album' : Album.objects.get(name='Lemonade'), 'genre' : Genre.objects.get(name='R&B'), 'duration': 234, 'release_date': timezone.datetime(2016, 4, 23)},
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': '6 Inch', 'album' : Album.objects.get(name='Lemonade'), 'genre' : Genre.objects.get(name='R&B'), 'duration': 225, 'release_date': timezone.datetime(2016, 4, 23)},
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': 'Daddy Lessons', 'album' : Album.objects.get(name='Lemonade'), 'genre' : Genre.objects.get(name='R&B'), 'duration': 266, 'release_date': timezone.datetime(2016, 4, 23)},
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': 'Love Drought', 'album' : Album.objects.get(name='Lemonade'), 'genre' : Genre.objects.get(name='R&B'), 'duration': 223, 'release_date': timezone.datetime(2016, 4, 23)},
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': 'Sandcastles', 'album' : Album.objects.get(name='Lemonade'), 'genre' : Genre.objects.get(name='R&B'), 'duration': 233, 'release_date': timezone.datetime(2016, 4, 23)},
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': 'Forward', 'album' : Album.objects.get(name='Lemonade'), 'genre' : Genre.objects.get(name='R&B'), 'duration': 66, 'release_date': timezone.datetime(2016, 4, 23)},
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': 'Freedom', 'album' : Album.objects.get(name='Lemonade'), 'genre' : Genre.objects.get(name='R&B'), 'duration': 288, 'release_date': timezone.datetime(2016, 4, 23)},
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': 'All Night', 'album' : Album.objects.get(name='Lemonade'), 'genre' : Genre.objects.get(name='R&B'), 'duration': 336, 'release_date': timezone.datetime(2016, 4, 23)},
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': 'Formation', 'genre' : Genre.objects.get(name='R&B'), 'duration': 262, 'release_date': timezone.datetime(2016, 2, 6)},
+
+        # Other Popular Beyoncé Singles
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': 'Halo', 'genre' : Genre.objects.get(name='R&B'), 'duration': 256, 'release_date': timezone.datetime(2008, 1, 20)},
+        {'artist' : Artist.objects.get(name='Beyonce'), 'name': 'Irreplaceable', 'genre' : Genre.objects.get(name='R&B'), 'duration': 220, 'release_date': timezone.datetime(2006, 10, 23)},
     ]
 
     for song_data in songs_data:
