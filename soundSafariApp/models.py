@@ -132,7 +132,7 @@ class Page(models.Model):
     song = models.OneToOneField(Song, on_delete=models.CASCADE, null=True, blank=True)
 
 
-    name = models.CharField(max_length=30, default='page') # Name of album/Song/Artist associated with the page for use in Page.objects.get()
+    name = models.CharField(max_length=30, default='No Name') # Name of album/Song/Artist associated with the page for use in Page.objects.get()
     avg_rating = models.IntegerField(default=0)            # Just a starting value of 0 when there are no reviews
     url = models.URLField(null=True)
 
@@ -170,6 +170,8 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     date_created = models.DateField(null=True,default=None)
     picture = models.ImageField(default="images/defaultUsrImg.jpg")
+    bio = models.TextField(blank=True, null=True) 
+
 
     def __str__(self):
         return self.user.username

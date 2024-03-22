@@ -160,3 +160,20 @@ def add_genre(request):
 def user_logout(request):
     logout(request)
     return redirect(reverse('soundSafariApp:index'))
+
+@login_required
+def user_profile(request):
+    return render(request, 'soundSafariApp/profile.html')
+
+
+
+@login_required
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST, request.FILES, instance=request.user.userprofile)
+        if form.is_valid():
+            form.save()
+            return redirect('soundSafariApp:user_profile')
+    else:
+        form = EditProfileForm(instance=request.user.userprofile)
+    return render(request, 'soundSafariApp/edit_profile.html', {'form': form})

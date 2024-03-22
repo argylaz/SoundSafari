@@ -8,7 +8,7 @@ from soundSafariApp.models import Genre, Artist, Album, Song, Page, UserProfile,
 from django.contrib.auth.models import User
 
 def create_genres():
-    genres = ['Pop', 'Rock', 'Hip-Hop', 'Electronic', 'Jazz']
+    genres = ['Pop', 'Rock', 'Heavy Metal', 'Hip-Hop', 'Electronic', 'Jazz']
     for genre_name in genres:
         Genre.objects.get_or_create(name=genre_name)
 
@@ -28,6 +28,16 @@ def create_artists():
             'name': 'Eminem', 
             'birthDate': timezone.datetime(1972, 10, 17),
             'picture': 'images/Eminem.jpg',
+        },
+        {
+            'name' : 'ACDC',
+            'birthDate' : timezone.datetime(1973, 1, 1),
+            'picture' : 'images/ACDC.jpg',
+        },
+        {
+            'name' : 'Hittman',
+            'birthDate' : timezone.datetime(1985, 1, 1),
+            'picture' : 'images/Hittman.jpg',
         }
     ]
     for artist_data in artists_data:
@@ -55,6 +65,20 @@ def create_albums():
             'artist': Artist.objects.get(name='Eminem'),
             'release_date': timezone.datetime(200, 5, 26),
             'picture': 'images/TheEminemShow.jpg',
+        },
+        {
+            'name' : 'Highway to Hell',
+            'genre' : Genre.objects.get(name='Rock'),
+            'artist' : Artist.objects.get(name='ACDC'),
+            'release_date' : timezone.datetime(1979, 7, 27),
+            'picture' : 'images/HighwayToHell.jpg',
+        },
+        {
+            'name' : 'Hittman (1984)',
+            'genre' : Genre.objects.get(name='Heavy Metal'),
+            'artist' : Artist.objects.get(name='Hittman'),
+            'release_date' : timezone.datetime(1984, 1, 1),
+            'picture' : 'images/HittmanAlbum.jpg',
         }
     ]
     for album_data in albums_data:
@@ -121,6 +145,38 @@ def create_songs():
         
         # Add more songs as needed
         {'artist' : Artist.objects.get(name='Eminem'), 'name': 'Lose Yourself', 'genre' : Genre.objects.get(name='Hip-Hop'), 'duration': 326, 'release_date': timezone.datetime(2002, 10, 28)},
+
+        # AC/DC Album Songs
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Highway to Hell', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 208, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Girls Got Rhythm', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 189, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Walk All Over You', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 310, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Touch Too Much', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 272, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Beating Around the Bush', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 223, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Shot Down in Flames', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 183, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Get It Hot', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 185, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'If You Want Blood (You\'ve Got It)', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 280, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Love Hungry Man', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 245, 'release_date': timezone.datetime(1979, 7, 27)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Night Prowler', 'album' : Album.objects.get(name='Highway to Hell'), 'genre' : Genre.objects.get(name='Rock'), 'duration': 276, 'release_date': timezone.datetime(1979, 7, 27)},
+
+        # AC/DC Singles
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Back in Black', 'genre' : Genre.objects.get(name='Rock'), 'duration': 255, 'release_date': timezone.datetime(1980, 7, 21)},
+        {'artist' : Artist.objects.get(name='ACDC'), 'name': 'Thunderstruck', 'genre' : Genre.objects.get(name='Rock'), 'duration': 292, 'release_date': timezone.datetime(1990, 9, 10)},
+
+        # Hittman Album songs
+        {'artist' : Artist.objects.get(name='Hittman'), 'name': 'Metal Sport', 'album' : Album.objects.get(name='Hittman (1984)'), 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 211, 'release_date': timezone.datetime(1988, 1, 1)},
+        {'artist' : Artist.objects.get(name='Hittman'), 'name': 'Breakout', 'album' : Album.objects.get(name='Hittman (1984)'), 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 215, 'release_date': timezone.datetime(1988, 1, 1)},
+        {'artist' : Artist.objects.get(name='Hittman'), 'name': 'Backstreet Rebels', 'album' : Album.objects.get(name='Hittman (1984)'), 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 279, 'release_date': timezone.datetime(1988, 1, 1)},
+        {'artist' : Artist.objects.get(name='Hittman'), 'name': 'Caught in the Crossfire', 'album' : Album.objects.get(name='Hittman (1984)'), 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 249, 'release_date': timezone.datetime(1988, 1, 1)},
+        {'artist' : Artist.objects.get(name='Hittman'), 'name': 'Secret Agent Man', 'album' : Album.objects.get(name='Hittman (1984)'), 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 282, 'release_date': timezone.datetime(1988, 1, 1)},
+        {'artist' : Artist.objects.get(name='Hittman'), 'name': 'Behind the Lines', 'album' : Album.objects.get(name='Hittman (1984)'), 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 233, 'release_date': timezone.datetime(1988, 1, 1)},
+        {'artist' : Artist.objects.get(name='Hittman'), 'name': 'The Test of Time', 'album' : Album.objects.get(name='Hittman (1984)'), 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 222, 'release_date': timezone.datetime(1988, 1, 1)},
+        {'artist' : Artist.objects.get(name='Hittman'), 'name': 'Kick in the Teeth', 'album' : Album.objects.get(name='Hittman (1984)'), 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 230, 'release_date': timezone.datetime(1988, 1, 1)},
+        {'artist' : Artist.objects.get(name='Hittman'), 'name': 'Battleground', 'album' : Album.objects.get(name='Hittman (1984)'), 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 230, 'release_date': timezone.datetime(1988, 1, 1)},
+        {'artist' : Artist.objects.get(name='Hittman'), 'name': 'Dead on Arrival', 'album' : Album.objects.get(name='Hittman (1984)'), 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 224, 'release_date': timezone.datetime(1988, 1, 1)},
+
+        # Hittman Singles
+        {'artist' : Artist.objects.get(name='Hittman'), 'name': 'Back Street Rebels', 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 279, 'release_date': timezone.datetime(1988, 1, 1)},
+        {'artist' : Artist.objects.get(name='Hittman'), 'name': 'Dead on Arrival', 'genre' : Genre.objects.get(name='Heavy Metal'), 'duration': 224, 'release_date': timezone.datetime(1988, 1, 1)},
     ]
 
     for song_data in songs_data:
